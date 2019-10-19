@@ -259,7 +259,7 @@ svg.icon {
 .navbar-header {
   position: absolute;
   top: 0;
-  height: 60px;
+  height: 45px;
   width: 100%;
   text-align: center;
   z-index: 999;
@@ -272,7 +272,7 @@ svg.icon {
     box-shadow: 0 0 3px rgba(14, 14, 14, 0.26);
     background-color: rgba(255, 255, 255, 0.98); }
     .navbar-header.fixed-header .blog-title {
-      line-height: 60px;
+      line-height: 45px;
       font-size: 18px;
       color: #21D4FD;
       background: linear-gradient(30deg, #21D4FD, #B721FF);
@@ -473,16 +473,16 @@ svg.icon {
 
 .article .support-author {
   padding: 25px;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
   background-color: whitesmoke;
   border-left: 4px solid #49be38;
   border-radius: 3px;
   box-sizing: border-box;
   box-shadow: 0 0 1px #d9d9d9;
-  margin: 50px auto; }
+  margin: 60px auto 10px auto; }
 
 .article .support-author p {
-  margin: 0 auto 10px;
+  margin: 0 auto 1px;
   font-size: 17px;
   font-weight: bold; }
 
@@ -538,8 +538,8 @@ svg.icon {
   border-top: 1px solid #d9d9d9;
   margin: 10px auto 0;
   text-align: center;
-  padding: 80px 0 10px;
-  line-height: 38px; }
+  padding: 15px 0 10px;
+  line-height: 28px; }
   .footer .info a {
     color: #333; }
     .footer .info a:hover {
@@ -622,6 +622,49 @@ svg.icon {
 
 .otherLink .next {
   float: right; }
+
+
+/********上一篇 下一篇****************/
+#article-nav {
+  margin: 30px 0 10px 0;
+  padding-bottom: 1px;
+}
+#article-nav .article-nav-link-wrap {
+  margin: 0px 0px 0px 0px;
+  font-size: 14px;
+  color: #333;
+}
+#article-nav .article-nav-link-wrap .article-nav-title {
+  display: inline-block;
+  font-size: 1rem;
+  color: #999;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  -ms-transition: color 0.3s;
+  transition: color 0.3s;
+}
+#article-nav .article-nav-link-wrap strong {
+  background: #999;
+  color: #fff;
+  border-radius: 100%;
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  text-align: center;
+  -webkit-transition: background 0.3s;
+  -moz-transition: background 0.3s;
+  -ms-transition: background 0.3s;
+  transition: background 0.3s;
+}
+#article-nav .article-nav-link-wrap:hover strong {
+  background: #248eb7;
+}
+#article-nav .article-nav-link-wrap:hover .article-nav-title {
+  color: #fff;
+}
+#article-nav #article-nav-older {
+  float: right;
+}
 
 /******* index page nav *********/
 .page-nav {

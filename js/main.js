@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 //article page Topbar and title banckground
 function pattern(width = window.innerWidth) {
   return _trianglify_min_js__WEBPACK_IMPORTED_MODULE_1___default()({
-    width,
+    width: 0.1,
     height: 230,
     variance: 0.56,
     cell_size: 46,
@@ -144,10 +144,10 @@ function deletePatternPlaceholder() {
 function toggleHeaderNavBar() {
   document.addEventListener('scroll', function() {
     const offset = window.pageYOffset;
-    if (offset > 128) {
+    if (offset > 10) {
       pageFirstChild.classList.add('fixed-header');
     }
-    if (offset <= 128) {
+    if (offset <= 10) {
       pageFirstChild.classList.remove('fixed-header');
     }
   });
