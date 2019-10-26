@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="keywords" content="90后Uncle,个人博客,blog">
+  <meta name="description" content="90后Uncle的个人博客">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+  <link rel="dns-prefetch" href="https://at.alicdn.com">
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/blog/./style/main.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<title>HOME</title>
+  
+  
+</head>
+<body>
+  <canvas id="pattern-placeholder" height="230"></canvas>
+<div class="navbar-header">
+  <a class="blog-title" href="/blog/">HOME</a>
+  <a class="face-img" href="/blog/">
+    <img src="/img/icon-touxiang.png">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2019-10-26T07:52:42.336Z" itemprop="datePublished">2019-10-26</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2019-10-26T09:44:22.367Z" itemprop="dateUpdated">2019-10-26</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        
+        <h1 id="git-介绍和使用"><a href="#git-介绍和使用" class="headerlink" title="git 介绍和使用"></a>git 介绍和使用</h1><h2 id="git是分布式版本控制系统，SVN是集中式版本控制系统"><a href="#git是分布式版本控制系统，SVN是集中式版本控制系统" class="headerlink" title="git是分布式版本控制系统，SVN是集中式版本控制系统"></a>git是分布式版本控制系统，SVN是集中式版本控制系统</h2><ul>
+<li>集中式版本控制系统，版本库是集中存放在中央服务器，每次编写、修改、提取、上传等操作，首先需从中央服务器取得最新的版本，后进行编写等，完成后重新推送到中央服务器。且必须联网才能工作。</li>
+<li>分布式版本控制系统，无中央服务器，项目组内成员每人的电脑是一个完整的版本库。如：A在自己电脑改了文件C，B也在自己电脑上改了文件C，此时，A和B只需把各自修改推送给对方，就可以看见对方的修改。</li>
+</ul>
+<h3 id="git-安装"><a href="#git-安装" class="headerlink" title="git 安装"></a>git 安装</h3><ul>
+<li><p>搜索git，进入(<a href="https://www.git-scm.com/download/" target="_blank" rel="noopener">https://www.git-scm.com/download/</a>)，点击下载</p>
+</li>
+<li><p>点击安装包，点击“下一步”，安装时选择“Use git from git bash only…”，其它默认</p>
+</li>
+<li><p>安装完后，检查是否已经配置环境变量</p>
+</li>
+<li><p>配置git用户名和邮箱</p>
+</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 右键-git bash</span><br><span class="line"><span class="number">2</span>. git config --global user.name "用户名"</span><br><span class="line"><span class="number">3</span>. git config --global user.email "邮箱"</span><br><span class="line"><span class="number">4</span>. 检查是否配置成功，查看C:\User\电脑登录名\.gitconfig</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>为了在本地和远程仓库之间进行 免秘钥登录，可以配置ssh(具体可在网站搜索))</li>
+</ul>
+<h3 id="git常用命令"><a href="#git常用命令" class="headerlink" title="git常用命令"></a>git常用命令</h3><ul>
+<li>本地项目 -远程项目关联</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init  //本地项目文件夹右建-gitbash</span><br><span class="line">git remote add orign github仓库名地址</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一次将本地代码发布到远程仓库</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .   /git add file.txt //本地文件-本地暂存区,add 可以添加多个文件</span><br><span class="line">git commit -m '注释内容'   //暂存区-本地分支仓库-默认master)</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一次下载从远程仓库下载项目</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 远程仓库.git</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将本地代码提交到远程仓库</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在当前项目文件夹-右键-git bash</span><br><span class="line">git add .</span><br><span class="line">git commit -m '提交到分支'   //</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>将远程仓库的内容拉取到本地仓库分支</li>
+</ul>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git status  //查看仓库的当前状态</span><br><span class="line">git log  --pretty=oneline //查看历史记录commit_id</span><br><span class="line">git reset --hard commit_id  //返回到commit_id版本</span><br><span class="line">git reflog  //记录命令历史</span><br><span class="line">git checkout -b dev分支    //创建dev分支并切换到dev分支</span><br><span class="line">git branch  //列出所有分支</span><br><span class="line">git checkout master  //切换到master分支</span><br><span class="line">git switch -c dev //创建并切换到新的dev分支</span><br><span class="line">git merge dev // 合并指定分支到当前分支</span><br><span class="line">git branch -d dev  //删除dev分支</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>工作区(Working Directory)：项目文件夹</p>
+</li>
+<li><p>版本库(Repository):工作区有个隐藏的.git,是git的版本库。版本库中stage(或者叫index)的暂存区</p>
+</li>
+<li><p>把文件往Git版本库里添加的时候，是分两步执行的：</p>
+</li>
+</ul>
+<ol>
+<li><p>用git add把文件添加进去，实际上就是把文件修改添加到暂存区</p>
+</li>
+<li><p>用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支</p>
+</li>
+</ol>
+
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+          <a href="/blog/2019/10/19/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+
+        <!--<div class="otherLink">-->
+          <!--<div class="previous">-->
+          <!--</div>-->
+          <!--<div class="next">-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="comments" id="comments">-->
+          <!--
+-->
+        <!--</div>-->
+      <!--https://github.com/luuman/hexo-theme-spfk/blob/master/layout/_partial/post/nav.ejs-->
+      
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2019/10/19/about-me/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">关于我</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+      </div>
+      <!--<div class="post-nav">-->
+          <!--<div class="post-nav-next post-nav-item">-->
+              <!--<a href="" rel="next" title="将Hexo博客主题更换为NexT主题">-->
+                <!--<i class="fa fa-chevron-left"></i>-->
+                 <!--将Hexo博客主题更换为NexT主题-->
+              <!--</a>-->
+          <!--</div>-->
+          <!--<span class="post-nav-divider"></span>-->
+          <!--<div class="post-nav-prev post-nav-item">-->
+              <!--<a href="" rel="prev" title="在这里">-->
+                <!--在这里 <i class="fa fa-chevron-right"></i>-->
+              <!--</a>-->
+          <!--</div>-->
+        <!--</div>-->
+    </div>
+   
+</main>
+<div class="footer">
+  <div class="info">
+    <!--<p>-->
+    <!--<a href="https://hexo.io"> Hexo </a> 强力驱动 |-->
+      <!--<a href="https://github.com/Youthink/hexo-themes-yearn"> Yearn </a>-->
+      <!--主题-->
+    <!--</p>-->
+    <p>&copy;2019-2020 90后Uncle的博客</p>
+  </div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>//console
+  var consoleConfig = '\n欢迎访问(づ｡◕‿‿◕｡)づ！\n,\n小白一个，欢迎学习交流~~~ 🎉🎉🎉 \n'.split(',');
+  var canConsole = true;
+  var consoleInfo = (function(consoleConfig) {
+  if (!canConsole || !consoleConfig || consoleConfig.length < 1) {
+    return;
+  }
+  var consoleColor = '#6190e8';
+  var _console;
+  var backgroundTextStyle = 'padding: 1px 5px;color: #fff;background: ' + consoleColor + ';'
+  var textStyle = 'color: ' + consoleColor + ';';
+
+  consoleConfig.map(o => {
+    var num = (o.match(/%c/g) || []).length;
+    if(/^http(s)?:\/\//.test(o)) {
+      console.log('%c     ', 'background: url(' + o + ') no-repeat left center;font-size: 180px;');
+      return;
+    }
+    if (num > 0) {
+      var logArguments = [];
+      for (var i = 0; i < num; i++) {
+        if (i % 2 === 0) {
+          logArguments.push(backgroundTextStyle);
+        } else {
+          logArguments.push(textStyle);
+        }
+      }
+      (_console = console).log.apply(_console, ['%c' + o, textStyle].concat(logArguments));
+      return;
+    }
+    console.log('%c' + o, textStyle);
+  });
+}(consoleConfig));</script><script type="text/javascript" src="/blog/./js/main.js"></script>
+
+  <script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script src="//at.alicdn.com/t/font_159214_mvtxvg9me9.js"></script>
+</body>
+</html>
