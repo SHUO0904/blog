@@ -44,7 +44,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2019-10-26T10:02:50.465Z" itemprop="dateUpdated">2019-10-26</time>
+    更新 <time datetime="2019-10-27T08:33:22.023Z" itemprop="dateUpdated">2019-10-27</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -56,8 +56,8 @@
     <div class="article">
       <div class="content">
         
-        <h1 id="Git-介绍和使用"><a href="#Git-介绍和使用" class="headerlink" title="Git 介绍和使用"></a>Git 介绍和使用</h1><ul>
-<li><p>Git是分布式版本控制系统，SVN是集中式版本控制系统</p>
+        <h1 id="Git-介绍"><a href="#Git-介绍" class="headerlink" title="Git 介绍"></a>Git 介绍</h1><ul>
+<li><p>git是分布式版本控制系统，SVN是集中式版本控制系统</p>
 </li>
 <li><p>集中式版本控制系统，版本库是集中存放在中央服务器，每次编写、修改、提取、上传等操作，首先需从中央服务器取得最新的版本，后进行编写等，完成后重新推送到中央服务器。且必须联网才能工作。</p>
 </li>
@@ -65,59 +65,59 @@
 </li>
 </ul>
 <h3 id="Git-安装"><a href="#Git-安装" class="headerlink" title="Git 安装"></a>Git 安装</h3><ul>
-<li><p>搜索Git，进入(<a href="https://www.Git-scm.com/download/" target="_blank" rel="noopener">https://www.Git-scm.com/download/</a>)，点击下载</p>
+<li><p>搜索git，进入(<a href="https://www.git-scm.com/download/" target="_blank" rel="noopener">https://www.git-scm.com/download/</a>)，点击下载</p>
 </li>
-<li><p>点击安装包，点击“下一步”，安装时选择“Use Git from Git bash only…”，其它默认</p>
+<li><p>点击安装包，点击“下一步”，安装时选择“Use git from git bash only…”，其它默认</p>
 </li>
 <li><p>安装完后，检查是否已经配置环境变量</p>
 </li>
-<li><p>配置Git用户名和邮箱</p>
+<li><p>配置git用户名和邮箱</p>
 </li>
 </ul>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 右键-Git bash</span><br><span class="line"><span class="number">2</span>. Git config --global user.name "用户名"</span><br><span class="line"><span class="number">3</span>. Git config --global user.email "邮箱"</span><br><span class="line"><span class="number">4</span>. 检查是否配置成功，查看C:\User\电脑登录名\.Gitconfig</span><br></pre></td></tr></table></figure>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">右键-git bash</span><br><span class="line">git config --global user.name "用户名"</span><br><span class="line">git config --global user.email "邮箱"</span><br><span class="line">检查是否配置成功，查看C:\User\电脑登录名\.gitconfig</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>为了在本地和远程仓库之间进行 免秘钥登录，可以配置ssh(具体可在网站搜索))</li>
 </ul>
-<h3 id="Git常用命令"><a href="#Git常用命令" class="headerlink" title="Git常用命令"></a>Git常用命令</h3><ul>
+<h3 id="Git-常用操作"><a href="#Git-常用操作" class="headerlink" title="Git 常用操作"></a>Git 常用操作</h3><ul>
 <li>本地项目 -远程项目关联</li>
 </ul>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Git init  //本地项目文件夹右建-Gitbash</span><br><span class="line">Git remote add orign Github仓库名地址</span><br></pre></td></tr></table></figure>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init  //本地项目文件夹右建-gitbash</span><br><span class="line">git remote add origin github仓库名地址</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>第一次将本地代码发布到远程仓库</li>
 </ul>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Git add .   /Git add file.txt //本地文件-本地暂存区,add 可以添加多个文件</span><br><span class="line">Git commit -m '注释内容'   //暂存区-本地分支仓库-默认master)</span><br><span class="line">Git push -u origin master</span><br></pre></td></tr></table></figure>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .   /git add file.txt //本地文件-本地暂存区,add 可以添加多个文件</span><br><span class="line">git commit -m '注释内容'   //暂存区-本地分支仓库-默认master)</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>第一次下载从远程仓库下载项目</li>
 </ul>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Git clone 远程仓库.Git</span><br></pre></td></tr></table></figure>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 远程仓库.git</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>将本地代码提交到远程仓库</li>
 </ul>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在当前项目文件夹-右键-Git bash</span><br><span class="line">Git add .</span><br><span class="line">Git commit -m '提交到分支'   //</span><br><span class="line">Git push origin master</span><br></pre></td></tr></table></figure>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在当前项目文件夹-右键-git bash</span><br><span class="line">git add .</span><br><span class="line">git commit -m '提交到分支'   //</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>将远程仓库的内容拉取到本地仓库分支</li>
 </ul>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Git pull</span><br></pre></td></tr></table></figure>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Git status  //查看仓库的当前状态</span><br><span class="line">Git log  --pretty=oneline //查看历史记录commit_id</span><br><span class="line">Git reset --hard commit_id  //返回到commit_id版本</span><br><span class="line">Git reflog  //记录命令历史</span><br><span class="line">Git checkout -b dev分支    //创建dev分支并切换到dev分支</span><br><span class="line">Git branch  //列出所有分支</span><br><span class="line">Git checkout master  //切换到master分支</span><br><span class="line">Git switch -c dev //创建并切换到新的dev分支</span><br><span class="line">Git merge dev // 合并指定分支到当前分支</span><br><span class="line">Git branch -d dev  //删除dev分支</span><br></pre></td></tr></table></figure>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">git status  //查看仓库的当前状态</span><br><span class="line">git log  --pretty=oneline //查看历史记录commit_id</span><br><span class="line">git reset --hard commit_id  //返回到commit_id版本</span><br><span class="line">git reflog  //记录命令历史</span><br><span class="line">git checkout -b dev分支    //创建dev分支并切换到dev分支</span><br><span class="line">git branch  //列出所有分支</span><br><span class="line">git checkout master  //切换到master分支</span><br><span class="line">git switch -c dev //创建并切换到新的dev分支</span><br><span class="line">git merge dev // 合并指定分支到当前分支</span><br><span class="line">git branch -d dev  //删除dev分支</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li><p>工作区(Working Directory)：项目文件夹</p>
 </li>
-<li><p>版本库(Repository):工作区有个隐藏的.Git,是Git的版本库。版本库中stage(或者叫index)的暂存区</p>
+<li><p>版本库(Repository):工作区有个隐藏的.git,是git的版本库。版本库中stage(或者叫index)的暂存区</p>
 </li>
-<li><p>把文件往Git版本库里添加的时候，是分两步执行的：</p>
+<li><p>把文件往git版本库里添加的时候，是分两步执行的：</p>
 </li>
 </ul>
 <ol>
-<li><p>用Git add把文件添加进去，实际上就是把文件修改添加到暂存区</p>
+<li><p>用git add把文件添加进去，实际上就是把文件修改添加到暂存区</p>
 </li>
-<li><p>用Git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支</p>
+<li><p>用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支</p>
 </li>
 </ol>
 
