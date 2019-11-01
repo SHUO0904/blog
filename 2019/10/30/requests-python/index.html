@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="/blog/./style/main.css">
 	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-	<title>REST 和 RESTful API</title>
+	<title>【Python】 requests请求</title>
   
   
 </head>
@@ -32,7 +32,7 @@
     
   
   <h1 class="title">
-    REST 和 RESTful API
+    【Python】 requests请求
   </h1>
   
 
@@ -40,11 +40,11 @@
     <ul class="article-info">
       <li>
         发布
-        <time datetime="2019-10-29T11:48:08.000Z" itemprop="datePublished">2019-10-29</time>
+        <time datetime="2019-10-30T12:25:22.000Z" itemprop="datePublished">2019-10-30</time>
       </li>
       <li>
         
-    更新 <time datetime="2019-10-30T12:23:16.457Z" itemprop="dateUpdated">2019-10-30</time>
+    更新 <time datetime="2019-11-01T09:34:40.825Z" itemprop="dateUpdated">2019-11-01</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -56,37 +56,30 @@
     <div class="article">
       <div class="content">
         
-        <hr>
-<h2 id="Rest"><a href="#Rest" class="headerlink" title="Rest"></a>Rest</h2><ul>
-<li>Rest是 REpresentational State Transfer，即表现层状态转化。</li>
+        <h2 id="requests-post"><a href="#requests-post" class="headerlink" title="requests.post"></a>requests.post</h2><ul>
+<li>requests.post() 进行POST请求，传入报文的参数有2个，一个是data，一个是json</li>
+<li>常见的form表单可以直接使用data参数进行报文提交，data的对象是python中的字典类型</li>
+<li>最新存在payload报文，是一种json格式的报文，传入的报文对象需格式</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">request.post(url,data=json.dumps(data))</span><br><span class="line">request.post(url,json=data)  //json参数会自动将字典类型的对象转换为json格式</span><br></pre></td></tr></table></figure>
+
 <ol>
-<li>“表现层”指“资源”的“表现层“。把“资源”具体呈现出来的形式，叫做它的“表现层”。</li>
-<li>所谓”资源“，指网络中一个实体或者说网络上的一个具体信息。如:文本、图片等。</li>
-<li>所谓“转移”，代表客户端和服务器一个互动过程，过程中，涉及数据和状态的变化。</li>
-<li>互联网通信协议HTTP协议，是一个无状态的协议。这意味着，所有的状态都保存在服务器端。若客户端想要操作服务器，需通过某种手段，让服务换发生“状态转化”(State Transfer)。而这种转化是建立在表现层之上，叫做“表现层状态转化”</li>
-<li>客户端用到的手段，是HTTP协议中的四个操作方式的动词：GET、POST、PUT、DELETE，分别对应四种基本操作，GET用来获取资源，POST用来新建资源(可用户更新资源)，PUT用来更新资源，DELETE用来删除资源。<br>URL定位资源，直接映射到HTTP中已实现的GET，POST，Delete，PUT方法</li>
+<li>若data传递的参数为字符串，如json.dumps(payload),则request对参数进行url编码，所以data传字符串时，需要在header中指定Content-Type，如headers={“Content-Type”: “application/json”}</li>
+<li>如果data传递的是字典、元组组成的列表或列表作为值的字典，则request对参数进行url编码，Content-Type的值为application/x-www-form-urlencoded</li>
 </ol>
-<hr>
-<ul>
-<li>REST成熟度的四个层次</li>
-<li>第一个层次的web服务，是使用HTTP作为传输方式，实际上远程方法调用(RPC)的具体形式，SOAP和XML-RPC属于此类</li>
-<li>第二个层次的web服务，引入了资源的概念，每个资源有对应的标识符和表达。</li>
-<li>第三个层次的web服务，使用不同的HTTP方法进行不同 操作，并且使用HTTP状态码表示不同的结果。如:HTTP和Get方法来获取资源、DELETE方法来删除资源</li>
-<li>第四个层次的web服务，使用HATEOAS,在资源的表达中包含了链接信息。客户端可根据链接发现可执行的动作</li>
-</ul>
-<h2 id="Restful-Api"><a href="#Restful-Api" class="headerlink" title="Restful Api"></a>Restful Api</h2><ul>
-<li>REST描述的是网络中client和server的一种交互形式；RESTful API是一种REST风格的网络</li>
-</ul>
-<ol>
-<li>URL的根路径，如：<a href="http://api.****.com/v1" target="_blank" rel="noopener">http://api.****.com/v1</a></li>
-<li>需要有api版本信息，如：v1</li>
-<li>URL中使用名词指定资源，不用动词，且推荐使用复数，如：<a href="http://api.****.com/v1/books" target="_blank" rel="noopener">http://api.****.com/v1/books</a></li>
-<li>使用HTTP协议里的动词来实现资源的添加，修改，删除，更新。包括，GET、POST、PUT、DELETE</li>
-<li>使用正确的HTTP Status Code返回状态码，包括：2××=success(成功)、3××=Redirect(重定向)、4××=客户端错误、5××=服务端错误</li>
-</ol>
-<ul>
-<li>综上，RESTful API是无状态，请求URL=动作(GET/POST/PUT/DELETE)+资源，响应使用精确的状态码和JSON格式数据</li>
+<h2 id="content-type详解"><a href="#content-type详解" class="headerlink" title="content-type详解"></a>content-type详解</h2><ul>
+<li><p>http协议是建立在tcp/ip协议之上的应用层协议，主要包括三个部分，状态行，头部信息，消息主体。对应一个Http请求就是：请求行，请求头，请求体。</p>
+</li>
+<li><p>协议规定post提交数据，必须包含在消息主体中entiy-body中，但是协议并没有规定数据使用什么编码方式，开发者可以自己决定消息主体的格式。</p>
+</li>
+<li><p>数据发送出去后，需要接收 服务端解析成功，一般服务端会根据content-type 字段获取参数是怎么编码的，然后对应去解码</p>
+</li>
+<li><p>application/x-www-form-urlencoded,在最开始的请求方式中，请求参数都是放在url中，表单提交的时候，是以key=&amp;value=的方式写在url后面，是浏览器表单提交的默认方式</p>
+</li>
+<li><p>multipart/form-data,此种方式多用于文件上传，表单数据都保存在http的正文部分，各个表单项之间用bounday分开</p>
+</li>
+<li><p>application/json,与服务端消息主体是序列化的json字符串。目前比较常用，且spring对这个content-type上传的数据有很好的支持，对RestApi有很好的适配</p>
+</li>
 </ul>
 
       </div>
@@ -121,18 +114,9 @@
       
 <nav id="article-nav">
   
-    <a href="/blog/2019/10/30/requests-python/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          【Python】 requests请求
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2019/10/26/Git/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Git 介绍和使用</div>
+    <a href="/blog/2019/10/29/api/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">REST 和 RESTful API</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
