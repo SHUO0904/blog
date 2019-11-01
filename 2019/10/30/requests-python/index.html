@@ -44,7 +44,7 @@
       </li>
       <li>
         
-    更新 <time datetime="2019-11-01T09:34:40.825Z" itemprop="dateUpdated">2019-11-01</time>
+    更新 <time datetime="2019-11-01T09:41:38.470Z" itemprop="dateUpdated">2019-11-01</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -63,10 +63,10 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">request.post(url,data=json.dumps(data))</span><br><span class="line">request.post(url,json=data)  //json参数会自动将字典类型的对象转换为json格式</span><br></pre></td></tr></table></figure>
 
-<ol>
+<ul>
 <li>若data传递的参数为字符串，如json.dumps(payload),则request对参数进行url编码，所以data传字符串时，需要在header中指定Content-Type，如headers={“Content-Type”: “application/json”}</li>
 <li>如果data传递的是字典、元组组成的列表或列表作为值的字典，则request对参数进行url编码，Content-Type的值为application/x-www-form-urlencoded</li>
-</ol>
+</ul>
 <h2 id="content-type详解"><a href="#content-type详解" class="headerlink" title="content-type详解"></a>content-type详解</h2><ul>
 <li><p>http协议是建立在tcp/ip协议之上的应用层协议，主要包括三个部分，状态行，头部信息，消息主体。对应一个Http请求就是：请求行，请求头，请求体。</p>
 </li>
