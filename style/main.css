@@ -894,8 +894,8 @@ svg.icon {
     display: none; }
   .navbar-header.fixed-header .face-img {
     display: block;
-    margin: 0 auto;
-    line-height: 80px; }
+    margin: 10px auto 10px auto;
+    line-height: 30px; }
     .navbar-header.fixed-header .face-img img {
       border-radius: 50%;
       height: 30px;
