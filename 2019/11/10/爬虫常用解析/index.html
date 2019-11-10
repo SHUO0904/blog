@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="keywords" content="90后学生,个人博客,blog">
+  <meta name="description" content="90后学生的个人博客">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+  <link rel="dns-prefetch" href="https://at.alicdn.com">
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/blog/./style/main.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<title>爬虫常用解析</title>
+  
+  
+</head>
+<body>
+  <canvas id="pattern-placeholder" height="230"></canvas>
+<div class="navbar-header">
+  <a class="blog-title" href="/blog/">HOME</a>
+  <a class="face-img" href="/blog/">
+    <img src="/blog/./img/icon-touxiang.png">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+  
+  <h1 class="title">
+    爬虫常用解析
+  </h1>
+  
+
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2019-11-10T10:52:30.000Z" itemprop="datePublished">2019-11-10</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2019-11-10T12:18:45.824Z" itemprop="dateUpdated">2019-11-10</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        
+        <h2 id="Xpath解析-lxml"><a href="#Xpath解析-lxml" class="headerlink" title="Xpath解析 (lxml)"></a>Xpath解析 (lxml)</h2><ul>
+<li><p>使用前，需进行安装lxml，pip install lxml</p>
+</li>
+<li><p>常用：</p>
+<figure class="highlight plain"><figcaption><span>wiki</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">nodename # 选取nodename节点所有子节点      xpath(&apos;//div&apos;)  # 选取了所有div节点</span><br><span class="line">   /     # 从根节点选取                   xpath(&apos;/div&apos;)   # 从根节点上选取div节点</span><br><span class="line">   //    # 选取所有的当前节点,不考虑位置    xpath(&apos;//div&apos;)  # 选取所有的div节点</span><br><span class="line">   .     # 选取当前节点                   xpath(&apos;./div&apos;)  # 选取当前节点下的div节点</span><br><span class="line">   ..    # 选取当前节点父节点              xpath(&apos;..&apos;)     #回到上一个节点</span><br><span class="line">  @      # 选取属性                       xpath(&apos;//@class&apos;) #选取所有的class属性</span><br><span class="line">//div[@class=&apos;song&apos;]              # 找到class属性值为song的div标签</span><br><span class="line">//div[@class=&apos;tang&apos;]/url/li[2]/a  # 找到class属性值为tang的div的直系子标签url下第二个标签li直系子标签a</span><br><span class="line">//a[@href=&apos;&apos;and @class=&apos;du&apos;]      # 找到href属性值为空且class属性值为du的a标签</span><br><span class="line">//div[contains(@class, &apos;ng&apos;)]     # 模糊查询</span><br><span class="line">//div[starts-with(@class,&apos;ta&apos;)]   # 模糊查询</span><br><span class="line">//div[@class=&apos;song&apos;]/p[1]/text()  # / 表示获取某个标签下的文本内容</span><br><span class="line">//div[@class=&apos;tang&apos;]//text()      # // 表示获取某个标签下的文本内容和所有子标签下的文本内容</span><br><span class="line">//div[@class=&apos;tang&apos;]//li[2]/a/@href  #取属性</span><br><span class="line">    函数                  用法                                                  解释</span><br><span class="line">starts-with       xpath(‘//div[starts-with(@id,”ma”)]‘)             # 选取id值以ma开头的div节点</span><br><span class="line">contains          xpath(‘//div[contains(@id,”ma”)]‘)                # 选取id值包含ma的div节点</span><br><span class="line">text()           xpath(‘//div[contains(text(),”ma”)]‘)              # 选取节点文本包含ma的div节点</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先导包</span></span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将html文档或者xml文档转换成一个etree对象，然后调用对象中的方法查找指定的节点</span></span><br><span class="line"><span class="comment"># 1. 本地文件</span></span><br><span class="line">tree = etree.parse(文件名)</span><br><span class="line">tree.xpath(<span class="string">"xpath表达式"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 网络数据</span></span><br><span class="line">tree = etree.HTML(网页内容字符串)</span><br><span class="line">tree.xpath(<span class="string">"xpath表达式"</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Beautiful-Soup-解析"><a href="#Beautiful-Soup-解析" class="headerlink" title="Beautiful Soup 解析"></a>Beautiful Soup 解析</h2><ul>
+<li><p>使用前，需安装beautifulsoup，pip install beautifulsoup4</p>
+</li>
+<li><p>Beautiful Soup 支持python标准库中的HTML解析器，也可使用第三方解析器，如lxml</p>
+</li>
+<li><p>常用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"># 根据标签名查找</span><br><span class="line">    - soup.a   只能找到第一个符合要求的标签</span><br><span class="line"># 获取属性</span><br><span class="line">    - soup.a.attrs  获取a所有的属性和属性值，返回一个字典</span><br><span class="line">    - soup.a.attrs[&apos;href&apos;]   获取href属性</span><br><span class="line">    - soup.a[&apos;href&apos;]   也可简写为这种形式</span><br><span class="line"># 获取内容</span><br><span class="line">    - soup.a.string</span><br><span class="line">    - soup.a.text</span><br><span class="line">    - soup.a.get_text()</span><br><span class="line">   注意:如果标签还有标签，那么string获取到的结果为None，而其它两个，可以获取文本内容</span><br><span class="line"># find：找到第一个符合要求的标签</span><br><span class="line">    - soup.find(&apos;a&apos;)  找到第一个符合要求的</span><br><span class="line">    - soup.find(&apos;a&apos;, title=&quot;xxx&quot;)</span><br><span class="line">    - soup.find(&apos;a&apos;, alt=&quot;xxx&quot;)</span><br><span class="line">    - soup.find(&apos;a&apos;, class_=&quot;xxx&quot;)</span><br><span class="line">    - soup.find(&apos;a&apos;, id=&quot;xxx&quot;)</span><br><span class="line"># find_all：找到所有符合要求的标签</span><br><span class="line">    - soup.find_all(&apos;a&apos;)</span><br><span class="line">    - soup.find_all([&apos;a&apos;,&apos;b&apos;]) 找到所有的a和b标签</span><br><span class="line">    - soup.find_all(&apos;a&apos;, limit=2)  限制前两个</span><br><span class="line"># 根据选择器选择指定的内容</span><br><span class="line">           select:soup.select(&apos;#feng&apos;)</span><br><span class="line">    - 常见的选择器：标签选择器(a)、类选择器(.)、id选择器(#)、层级选择器</span><br><span class="line">        - 层级选择器：</span><br><span class="line">            div .dudu #lala .meme .xixi  下面好多级</span><br><span class="line">            div &gt; p &gt; a &gt; .lala          只能是下面一级</span><br><span class="line">    注意:select选择器返回永远是列表，需要通过下标提取指定的对象</span><br><span class="line">------------------------------------------------------------------------------------------------ ------------------------------------------------------------------------------------------------</span><br><span class="line">from bs4 import BeautifulSoup</span><br><span class="line">soup=BeautifulSoup(html_doc,&apos;lxml&apos;)</span><br><span class="line">#字符串：即标签名</span><br><span class="line">print(soup.find_all(&apos;b&apos;))</span><br><span class="line">#正则表达式</span><br><span class="line">import re</span><br><span class="line">print(soup.find_all(re.compile(&apos;^b&apos;))) #找出b开头的标签，结果有body和b标签</span><br><span class="line"></span><br><span class="line"># 列表：如果传入列表参数,Beautiful Soup会将与列表中任一元素匹配的内容返回.下面代码找到文档中所有&lt;a&gt;标签和&lt;b&gt;标签:</span><br><span class="line">print(soup.find_all([&apos;a&apos;,&apos;b&apos;]))</span><br><span class="line"></span><br><span class="line">#True：可以匹配任何值,下面代码查找到所有的tag,但是不会返回字符串节点</span><br><span class="line">print(soup.find_all(True))</span><br><span class="line">for tag in soup.find_all(True):</span><br><span class="line">    print(tag.name)</span><br><span class="line"></span><br><span class="line">#方法:如果没有合适过滤器,那么还可以定义一个方法,方法只接受一个元素参数 ,如果这个方法返回 True 表示当前元素匹配并且被找到,如果不是则反回 False</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">注意：关键字是class_，class_=value,value可以是五种选择器之一</span><br><span class="line">print(soup.find_all(&apos;a&apos;,class_=&apos;sister&apos;)) # 查找类为sister的a标签</span><br><span class="line">print(soup.find_all(&apos;a&apos;,class_=&apos;sister ssss&apos;)) # 查找类为sister和sss的a标签，顺序错误也匹配不成功</span><br><span class="line">print(soup.find_all(class_=re.compile(&apos;^sis&apos;))) # 查找类为sister的所有标签</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">#attrs</span><br><span class="line">print(soup.find_all(&apos;p&apos;,attrs=&#123;&apos;class&apos;:&apos;story&apos;&#125;))</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">#text 值可以是：字符，列表，True，正则</span><br><span class="line">print(soup.find_all(text=&apos;Elsie&apos;))</span><br><span class="line">print(soup.find_all(&apos;a&apos;,text=&apos;Elsie&apos;))</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">#limit参数：如果文档树很大那么搜索会很慢.如果我们不需要全部结果,可以使用 limit 参数限制返回结果的数量.效果与SQL中的limit关键字类似,当搜索到的结果数量达到 limit 的限制时,就停止搜索返回结果</span><br><span class="line">print(soup.find_all(&apos;a&apos;,limit=2))</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">#recursive 调用tag的 find_all() 方法时,Beautiful Soup会检索当前tag的所有子孙节点,如果只想搜索tag的直接子节点,可以使用参数 recursive=False</span><br><span class="line">print(soup.html.find_all(&apos;a&apos;))</span><br><span class="line">print(soup.html.find_all(&apos;a&apos;,recursive=False))</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">#tag：像调用 find_all() 一样调用tag find_all() 几乎是Beautiful Soup中最常用的搜索方法,所以我们定义了它的简写方法. BeautifulSoup 对象和 tag 对象可以被当作一个方法来使用~</span><br><span class="line"># 下面两行代码是等价的:</span><br><span class="line">soup.find_all(&quot;a&quot;)</span><br><span class="line">soup(&quot;a&quot;)</span><br><span class="line"># 这两行代码也是等价的:</span><br><span class="line">soup.title.find_all(text=True)</span><br><span class="line">soup.title(text=True)</span><br><span class="line">-------------------------------------------------------------------------------------------------</span><br><span class="line">#find_all() 方法将返回文档中符合条件的所有tag,尽管有时候我们只想得到一个结果.比如文档中只有一个&lt;body&gt;标签,那么使用 find_all() 方法来查找&lt;body&gt;标签就不太合适, 使用 find_all 方法并设置 limit=1 参数不如直接使用 find() 方法</span><br><span class="line">soup.find_all(&apos;title&apos;, limit=1)</span><br><span class="line"># [&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;]</span><br><span class="line">soup.find(&apos;title&apos;)</span><br><span class="line"># &lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;</span><br><span class="line">#find() 方法直接返回结果.find_all() 方法没有找到目标是返回空列表, find() 方法找不到目标时,返回 None</span><br><span class="line">print(soup.find(&quot;nosuchtag&quot;))</span><br><span class="line"># None</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转化本地文件</span></span><br><span class="line">soup = BeautifulSoup(open(<span class="string">'本地文件'</span>), <span class="string">'lxml'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转化网络文件</span></span><br><span class="line">soup = BeautifulSoup(<span class="string">'字符串类型或者字节类型'</span>, <span class="string">'lxml'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从文档中获取所有文字内容:</span></span><br><span class="line">print(soup.get_text())</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="正则表达式解析"><a href="#正则表达式解析" class="headerlink" title="正则表达式解析"></a>正则表达式解析</h2><ul>
+<li><p>使用正则表达式进行提起，如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pattern = re.compile(<span class="string">'&lt;dd&gt;.*?board-index.*?&gt;(\d+)&lt;/i&gt;.*?src="(.*?)".*?name"&gt;&lt;a'</span></span><br><span class="line">                     +<span class="string">'.*?&gt;(.*?)&lt;/a&gt;.*?star"&gt;(.*?)&lt;/p&gt;.*?releasetime"&gt;(.*?)&lt;/p&gt;'</span></span><br><span class="line">                     +<span class="string">'.*?integer"&gt;(.*?)&lt;/i&gt;.*?fraction"&gt;(.*?)&lt;/i&gt;.*?&lt;/dd&gt;'</span>, re.S)</span><br><span class="line">items = re.findall(pattern, html)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+          <a href="/blog/2019/10/19/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+
+        <!--<div class="otherLink">-->
+          <!--<div class="previous">-->
+          <!--</div>-->
+          <!--<div class="next">-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="comments" id="comments">-->
+          <!--
+-->
+        <!--</div>-->
+      <!--https://github.com/luuman/hexo-theme-spfk/blob/master/layout/_partial/post/nav.ejs-->
+      
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2019/10/30/requests-python/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">【Python】 requests请求</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+      </div>
+      <!--<div class="post-nav">-->
+          <!--<div class="post-nav-next post-nav-item">-->
+              <!--<a href="" rel="next" title="将Hexo博客主题更换为NexT主题">-->
+                <!--<i class="fa fa-chevron-left"></i>-->
+                 <!--将Hexo博客主题更换为NexT主题-->
+              <!--</a>-->
+          <!--</div>-->
+          <!--<span class="post-nav-divider"></span>-->
+          <!--<div class="post-nav-prev post-nav-item">-->
+              <!--<a href="" rel="prev" title="在这里">-->
+                <!--在这里 <i class="fa fa-chevron-right"></i>-->
+              <!--</a>-->
+          <!--</div>-->
+        <!--</div>-->
+    </div>
+   
+</main>
+<div class="footer">
+  <div class="info">
+    <!--<p>-->
+    <!--<a href="https://hexo.io"> Hexo </a> 强力驱动 |-->
+      <!--<a href="https://github.com/Youthink/hexo-themes-yearn"> Yearn </a>-->
+      <!--主题-->
+    <!--</p>-->
+    <p>&copy;2019-2020 90后学生的博客</p>
+  </div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>//console
+  var consoleConfig = '\n欢迎访问(づ｡◕‿‿◕｡)づ！\n,\n小白一个，欢迎学习交流~~~ 🎉🎉🎉 \n'.split(',');
+  var canConsole = true;
+  var consoleInfo = (function(consoleConfig) {
+  if (!canConsole || !consoleConfig || consoleConfig.length < 1) {
+    return;
+  }
+  var consoleColor = '#6190e8';
+  var _console;
+  var backgroundTextStyle = 'padding: 1px 5px;color: #fff;background: ' + consoleColor + ';'
+  var textStyle = 'color: ' + consoleColor + ';';
+
+  consoleConfig.map(o => {
+    var num = (o.match(/%c/g) || []).length;
+    if(/^http(s)?:\/\//.test(o)) {
+      console.log('%c     ', 'background: url(' + o + ') no-repeat left center;font-size: 180px;');
+      return;
+    }
+    if (num > 0) {
+      var logArguments = [];
+      for (var i = 0; i < num; i++) {
+        if (i % 2 === 0) {
+          logArguments.push(backgroundTextStyle);
+        } else {
+          logArguments.push(textStyle);
+        }
+      }
+      (_console = console).log.apply(_console, ['%c' + o, textStyle].concat(logArguments));
+      return;
+    }
+    console.log('%c' + o, textStyle);
+  });
+}(consoleConfig));</script><script type="text/javascript" src="/blog/./js/main.js"></script>
+
+  <script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-2" count="10" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script src="//at.alicdn.com/t/font_159214_mvtxvg9me9.js"></script>
+</body>
+</html>
