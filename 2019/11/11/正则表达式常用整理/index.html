@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="keywords" content="90后学生,个人博客,blog">
+  <meta name="description" content="90后学生的个人博客">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+  <link rel="dns-prefetch" href="https://at.alicdn.com">
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/blog/./style/main.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<title>HOME</title>
+  
+  
+</head>
+<body>
+  <canvas id="pattern-placeholder" height="230"></canvas>
+<div class="navbar-header">
+  <a class="blog-title" href="/blog/">HOME</a>
+  <a class="face-img" href="/blog/">
+    <img src="/blog/./img/icon-touxiang.png">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2019-11-11T08:02:31.315Z" itemprop="datePublished">2019-11-11</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2019-11-12T03:27:05.785Z" itemprop="dateUpdated">2019-11-12</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        
+        <p>title: 【Python】正则表达式常用整理<br>date: 2019-11-11 16:02:31<br>tags:</p>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><ul>
+<li><p>正则表达式（regular expression）是对字符串操作一种逻辑公式，用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，对字符串一种过滤逻辑。最简单正则表达式是普通字符串，可以匹配其自身。如，正则表达式‘hello’可以匹配字符串‘hello’</p>
+</li>
+<li><p>正则表达式不是一个程序，是用于处理字符串的一种模式；使用时需使用支持正则表达式工具，如：Linux中的awk，sed，grep，或编程语言中的Perl，Python，Java等等</p>
+</li>
+<li><p>字符组:[字符组]，在同一个位置可能出现的各种字符组成一个字符组，在正则表达式中用[  ]表示；字符分为很多类，比如：数字，字母，标点等</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>正则</strong></th>
+<th align="center"><strong>待匹配字符</strong></th>
+<th align="center"><strong>匹配结果</strong></th>
+<th align="left"><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">[0123456789]</td>
+<td align="center">8</td>
+<td align="center">True</td>
+<td align="left">在一个字符组里枚举合法的所有字符，字符组里的一个字符和“待匹配字符”相同都视为可以匹配</td>
+</tr>
+<tr>
+<td align="center">[0123456789]</td>
+<td align="center">a</td>
+<td align="center">False</td>
+<td align="left">由于字符组中没有“a”字符，无匹配结果</td>
+</tr>
+<tr>
+<td align="center">[0-9]</td>
+<td align="center">7</td>
+<td align="center">True</td>
+<td align="left">可以用 - 表示范围，[0-9]和[0123456789]是一个意思</td>
+</tr>
+<tr>
+<td align="center">[a-z]</td>
+<td align="center">s</td>
+<td align="center">True</td>
+<td align="left">匹配所有的小写字母</td>
+</tr>
+<tr>
+<td align="center">[A-Z]</td>
+<td align="center">B</td>
+<td align="center">True</td>
+<td align="left">匹配所有大写字母</td>
+</tr>
+<tr>
+<td align="center">[0-9a-fA-F]</td>
+<td align="center">e</td>
+<td align="center">True</td>
+<td align="left">匹配数字，大小写a~f，可用来验证十六进制字符</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>常用限定符</p>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*?</td>
+<td>重复任意次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>+？</td>
+<td>重复1次或更多次，但尽可能少重复</td>
+</tr>
+<tr>
+<td>？？</td>
+<td>重复0次或1次，尽可能少重复</td>
+</tr>
+<tr>
+<td>{n,m}?</td>
+<td>重复n到m次，但可能少重复</td>
+</tr>
+<tr>
+<td>{n,}?</td>
+<td>重复n次以上，但尽可能少重复</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>常用表达式全集</p>
+<table>
+<thead>
+<tr>
+<th align="center">字            符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">\</td>
+<td>将一个字符标记为一个特殊字符、或一个原义字符、或一个向后引用、或一个八进制转义符。如：“n”匹配字符“n”。”\n”匹配一个换行符。“\\”匹配”\“。“\(”匹配“（”。</td>
+</tr>
+<tr>
+<td align="center">^</td>
+<td>匹配输入字符串的开始位置。</td>
+</tr>
+<tr>
+<td align="center">$</td>
+<td>匹配输入字符串的结束位置。</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td>匹配前面的子表达式零次或多次。如：zo* 能匹配“z”及“zoo”，* 等价于{0，}</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td>匹配前面的子表达式一次或多次。如：zo+ 能匹配”zo“及”zoo“，但不能匹配”z“。+等价于{1，}</td>
+</tr>
+<tr>
+<td align="center">？</td>
+<td>匹配前面的字表达式零次或一次。如：do(es)? 能匹配 does 或 does中的do。？等价于{0,1}</td>
+</tr>
+<tr>
+<td align="center">{n}</td>
+<td>n是一个非负整数。匹配确定的n次。如：o{2} 不能匹配bob中的o，但能匹配 food 中的两个o</td>
+</tr>
+<tr>
+<td align="center">{n,}</td>
+<td>n是一个非负整数。至少匹配n次。如：o{2，} 不能匹配 ‘Bob’中的‘o’，但能匹配到 ‘foooooood’中所有o。“o{1,}等价于“o+”。”o{0,}“等价于”o*“</td>
+</tr>
+<tr>
+<td align="center">{n,m}</td>
+<td>m和n均为非负整数，其中n&lt;=m。最少匹配n次且最多匹配m次。如：”o{1,3}”将匹配“fooooooood”中前三个o。“o{0,1}”等价于“o?”。注意逗号和两个数之间不能有空格。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">？</th>
+<th>当该字符紧跟在任何一个其它限制符(*,+,?,{n},{n,},{n,m})后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。如：字符串”ooooo”，”o+?”将匹配单个”o”，而”o+”将匹配所有”o”</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>.</strong></td>
+<td>匹配除 “\n”之外的任何单个字符。要匹配包括“\n”在内的任何字符，使用“(.|\n)”的模式</td>
+</tr>
+<tr>
+<td align="center">(pattern）</td>
+<td>匹配pattern并获取这一匹配</td>
+</tr>
+<tr>
+<td align="center">(?:pattern）</td>
+<td>匹配pattern但不获取匹配结果，非获取匹配。如：industr(?:y|ies) 比 “industry|industries”简略</td>
+</tr>
+<tr>
+<td align="center">(?=pattern</td>
+<td>正向肯定预查，任何匹配pattern的字符串开始匹配查找字符串。如：Window(?=95|98|NT|2000) 能匹配 Windows2000 中的 Windows，但不能匹配”Window3.1”中的”Windows“。在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</td>
+</tr>
+<tr>
+<td align="center">(?!pattern）</td>
+<td>正向否定预查，任何不匹配pattern的字符串开始匹配查找字符串。如：Windows(?!95|98|NT|2000) 能匹配“Windows3.1”中的“Windows”，不能匹配“Windows2000”中的“Windows”。在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始</td>
+</tr>
+<tr>
+<td align="center">(?&lt;=patt)</td>
+<td>反向肯定预查，与正向肯定预查类似，只是方向相反。如：”(?&lt;95|98|NT|2000)Windows”能匹配”2000Windows”中的”Windows“，但不能匹配”3.1Windows”中的”Windows”</td>
+</tr>
+<tr>
+<td align="center">(?&lt;!patt)</td>
+<td>反向否定预查，与正向否定预查类似，只是方向相反。如：“(?&lt;95|98|NT|2000)Windows”能匹配”3.1Windows”中的”Windows”，但不能匹配”2000Windows”中的“Windows”</td>
+</tr>
+<tr>
+<td align="center">x|y</td>
+<td>匹配x或y。如：“z|food”能匹配”z”或”food”。”(z|f)food”则匹配”zood”或”food”</td>
+</tr>
+<tr>
+<td align="center">[xyz]</td>
+<td>字符集合。匹配所包含的任意一个字符。如，”[abc]”可匹配”plain”中的”a”</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">[^xyz]</th>
+<th>负值字符集合。 匹配未包含的任意字符。如：”[^abc]”可匹配”plain”中的”p”</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">[a-z]</td>
+<td>字符范围。匹配指定范围内的任意字符。如：”[a-z]”可以匹配”a”到”z”范围内的任意字符</td>
+</tr>
+<tr>
+<td align="center">[^a-z]</td>
+<td>负值字符范围。匹配任何不在指定范围内的任意字符。如：”[^a-z]”可以匹配任何不在”a”到”z”范围内的任意字符</td>
+</tr>
+<tr>
+<td align="center">\b</td>
+<td>匹配一个单词边界，也就是单词和空格间的位置。如：”er\b”可以匹配”never”中的”er”，不能匹配”verb”中的“er”</td>
+</tr>
+<tr>
+<td align="center">\B</td>
+<td>匹配非单词边界。”er\B”能匹配”verb”中的“er”，但不能匹配”never”中的”er”</td>
+</tr>
+<tr>
+<td align="center">\cx</td>
+<td>匹配由x指明的控制字符。如：\cM匹配一个Control-M或回车符。x的值必须为A-Z或a-z之一。否则，将C视为一个原义的”c”字符</td>
+</tr>
+<tr>
+<td align="center">\d</td>
+<td>匹配一个数字字符，等价于[0-9]</td>
+</tr>
+<tr>
+<td align="center">\D</td>
+<td>匹配一个非数字字符，等价于[^0-9]</td>
+</tr>
+<tr>
+<td align="center">\f</td>
+<td>匹配一个换页符，等价于\x0c和\cL</td>
+</tr>
+<tr>
+<td align="center">\n</td>
+<td>匹配一个回车符，等价于\x0d和\cM</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">\r</th>
+<th>匹配一个回车符，等价于\x0d和\cM</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等待，等价于[\f\n\r\t\v]</td>
+</tr>
+<tr>
+<td align="center">\S</td>
+<td>匹配任何非空白字符，等价于[^\f\n\r\t\v]</td>
+</tr>
+<tr>
+<td align="center">\t</td>
+<td>匹配一个制表符，等价于\x09和\cl</td>
+</tr>
+<tr>
+<td align="center">\v</td>
+<td>匹配一个垂直制表符，等价于\x0b和\cK</td>
+</tr>
+<tr>
+<td align="center">\w</td>
+<td>匹配包括下划线的任何单词字符，等价于“[A-Za-z0-9]”</td>
+</tr>
+<tr>
+<td align="center">\W</td>
+<td>匹配任何非单词字符，等价于”[^A-Za-z0-9]”</td>
+</tr>
+<tr>
+<td align="center">\xn</td>
+<td>匹配n，其中n为十六进制转义值。十六进制转义值必须为确定的两个数长。如：”\x41”匹配”A”，“\x041”等价于”\x04&amp;1”，可以使用ASCII编码</td>
+</tr>
+<tr>
+<td align="center">\num</td>
+<td>匹配num，其中num是一个正整数。对获取的匹配引用。如：”(.)\1”匹配两个连续的相同字符</td>
+</tr>
+<tr>
+<td align="center">\n</td>
+<td>标识一个八进制转义值或一个向后引用。如果*n之前至少n个获取的子表达式，则n为向后引用。否则，如果n为八进制数字（0-7），则n为一个八进制转义值。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>*nml*</th>
+<th>如果<em>n</em>为八进制数字（0-3），且<em>m和l</em>均为八进制数字（0-7），则匹配八进制转义值<em>nm</em>l。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>**</strong>nm**</td>
+<td>标识一个八进制转义值或一个向后引用。如果*nm<em>之前至少有</em>nm<em>个获得子表达式，则</em>nm<em>为向后引用。如果\</em>nm<em>之前至少有</em>n<em>个获取，则</em>n<em>为一个后跟文字</em>m<em>的向后引用。如果前面的条件都不满足，若</em>n<em>和</em>m<em>均为八进制数字（0-7），则\</em>nm<em>将匹配八进制转义值</em>nm*。</td>
+</tr>
+<tr>
+<td>\u<em>n</em></td>
+<td>匹配<em>n</em>，其中<em>n</em>是一个用四个十六进制数字表示的Unicode字符。例如，\u00A9匹配版权符号（©）。</td>
+</tr>
+<tr>
+<td>用户名</td>
+<td>/^[a-z0-9_-]{3,16}$/</td>
+</tr>
+<tr>
+<td><strong>密码</strong></td>
+<td>/^[a-z0-9_-]{6,18}$/</td>
+</tr>
+<tr>
+<td>十六进制值</td>
+<td>/^#?([a-f0-9]{6}|[a-f0-9]{3})$/</td>
+</tr>
+<tr>
+<td>电子邮箱</td>
+<td>/^([a-z0-9_.-]+)@([\da-z.-]+).([a-z.]{2,6})$/<br>/^[a-z\d]+(.[a-z\d]+)*@(<a href="-[\da-z]">\da-z</a>?)+(.{1,2}[a-z]+)+$/</td>
+</tr>
+<tr>
+<td>URL</td>
+<td>/^(https?://)?([\da-z.-]+).([a-z.]{2,6})([/\w .-]<em>)</em>/?$/</td>
+</tr>
+<tr>
+<td>HTML 标签</td>
+<td>/^&lt;([a-z]+)([^&lt;]+)<em>(?:&gt;(.</em>)&lt;/\1&gt;|\s+/&gt;)$/</td>
+</tr>
+<tr>
+<td>删除代码\注释</td>
+<td>(?&lt;!http:|\S)//.*$</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Unicode编码中的汉字范围</th>
+<th>/^[\u2E80-\u9FFF]+$/</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>参考链接</td>
+<td><a href="http://tool.oschina.net/uploads/apidocs/jquery/regexp.html" target="_blank" rel="noopener">http://tool.oschina.net/uploads/apidocs/jquery/regexp.html</a></td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+          <a href="/blog/2019/10/19/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+
+        <!--<div class="otherLink">-->
+          <!--<div class="previous">-->
+          <!--</div>-->
+          <!--<div class="next">-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="comments" id="comments">-->
+          <!--
+-->
+        <!--</div>-->
+      <!--https://github.com/luuman/hexo-theme-spfk/blob/master/layout/_partial/post/nav.ejs-->
+      
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2019/11/10/爬虫常用解析/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">爬虫常用解析</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+      </div>
+      <!--<div class="post-nav">-->
+          <!--<div class="post-nav-next post-nav-item">-->
+              <!--<a href="" rel="next" title="将Hexo博客主题更换为NexT主题">-->
+                <!--<i class="fa fa-chevron-left"></i>-->
+                 <!--将Hexo博客主题更换为NexT主题-->
+              <!--</a>-->
+          <!--</div>-->
+          <!--<span class="post-nav-divider"></span>-->
+          <!--<div class="post-nav-prev post-nav-item">-->
+              <!--<a href="" rel="prev" title="在这里">-->
+                <!--在这里 <i class="fa fa-chevron-right"></i>-->
+              <!--</a>-->
+          <!--</div>-->
+        <!--</div>-->
+    </div>
+   
+</main>
+<div class="footer">
+  <div class="info">
+    <!--<p>-->
+    <!--<a href="https://hexo.io"> Hexo </a> 强力驱动 |-->
+      <!--<a href="https://github.com/Youthink/hexo-themes-yearn"> Yearn </a>-->
+      <!--主题-->
+    <!--</p>-->
+    <p>&copy;2019-2020 90后学生的博客</p>
+  </div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>//console
+  var consoleConfig = '\n欢迎访问(づ｡◕‿‿◕｡)づ！\n,\n小白一个，欢迎学习交流~~~ 🎉🎉🎉 \n'.split(',');
+  var canConsole = true;
+  var consoleInfo = (function(consoleConfig) {
+  if (!canConsole || !consoleConfig || consoleConfig.length < 1) {
+    return;
+  }
+  var consoleColor = '#6190e8';
+  var _console;
+  var backgroundTextStyle = 'padding: 1px 5px;color: #fff;background: ' + consoleColor + ';'
+  var textStyle = 'color: ' + consoleColor + ';';
+
+  consoleConfig.map(o => {
+    var num = (o.match(/%c/g) || []).length;
+    if(/^http(s)?:\/\//.test(o)) {
+      console.log('%c     ', 'background: url(' + o + ') no-repeat left center;font-size: 180px;');
+      return;
+    }
+    if (num > 0) {
+      var logArguments = [];
+      for (var i = 0; i < num; i++) {
+        if (i % 2 === 0) {
+          logArguments.push(backgroundTextStyle);
+        } else {
+          logArguments.push(textStyle);
+        }
+      }
+      (_console = console).log.apply(_console, ['%c' + o, textStyle].concat(logArguments));
+      return;
+    }
+    console.log('%c' + o, textStyle);
+  });
+}(consoleConfig));</script><script type="text/javascript" src="/blog/./js/main.js"></script>
+
+  <script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-2" count="10" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script src="//at.alicdn.com/t/font_159214_mvtxvg9me9.js"></script>
+</body>
+</html>
