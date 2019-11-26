@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="keywords" content="90后小子,个人博客,blog">
+  <meta name="description" content="90后小子的个人博客">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+  <link rel="dns-prefetch" href="https://at.alicdn.com">
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/blog/./style/main.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<title>selenium定位元素整理</title>
+  
+  
+</head>
+<body>
+  <canvas id="pattern-placeholder" height="230"></canvas>
+<div class="navbar-header">
+  <a class="blog-title" href="/blog/">HOME</a>
+  <a class="face-img" href="/blog/">
+    <img src="/blog/./img/icon-touxiang.png">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+  
+  <h1 class="title">
+    selenium定位元素整理
+  </h1>
+  
+
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2019-11-16T07:31:08.000Z" itemprop="datePublished">2019-11-16</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2019-11-16T07:32:42.467Z" itemprop="dateUpdated">2019-11-16</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        
+        <p>selenium webdriver进行元素定位时，通过seleniumAPI官方介绍，获取页面元素的方式一共有以下八种方式，现按照常用→不常用的顺序分别介绍一下。</p>
+<p>官方api地址：<a href="https://seleniumhq.github.io/selenium/docs/api/java/index.html" target="_blank" rel="noopener">https://seleniumhq.github.io/selenium/docs/api/java/index.html</a></p>
+<p><img src="https://images2015.cnblogs.com/blog/965054/201610/965054-20161015181550937-1628802755.png" alt="img"></p>
+<h2 id="一、By-Id"><a href="#一、By-Id" class="headerlink" title="一、By.Id()"></a>一、By.Id()</h2><p>在HTML中，ID属性–唯一标识一个元素的属性。selenium中，ID被作为首选的识别属性，因为这是最快的识别策略。</p>
+<p>以百度主页为例，搜索框的HTML示例代码如下，其ID为kw；</p>
+<p><img src="https://images2015.cnblogs.com/blog/965054/201610/965054-20161015182720343-47976892.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input id=&quot;kw&quot; name=&quot;wd&quot; class=&quot;s_ipt&quot; value=&quot;&quot; maxlength=&quot;255&quot; autocomplete=&quot;off&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>搜索框的ID是”kw”。</p>
+<p><img src="https://images2015.cnblogs.com/blog/965054/201610/965054-20161015183318218-1623257624.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;submit&quot; id=&quot;su&quot; value=&quot;百度一下&quot; class=&quot;bg s_btn&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>百度一下按钮的id是”su”。</p>
+<p>在WebDriver中通过ID查找元素的java示例代码如下：</p>
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> 1 import org.openqa.selenium.By;</span><br><span class="line"> 2 import org.openqa.selenium.WebDriver;</span><br><span class="line"> 3 import org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"> 4 import org.testng.annotations.Test;</span><br><span class="line"> 5 public class findElementByID &#123;</span><br><span class="line"> 6     @Test</span><br><span class="line"> 7     public void test() &#123;</span><br><span class="line"> 8         WebDriver driver = new ChromeDriver();                     //打开chrome浏览器</span><br><span class="line"> 9         driver.get(&quot;http://www.baidu.com&quot;);                        //输入网址</span><br><span class="line">10         driver.findElement(By.id(&quot;kw&quot;)).sendKeys(&quot;selenium&quot;);      //搜索框输入&quot;selenium&quot;</span><br><span class="line">11         driver.findElement(By.id(&quot;su&quot;)).click();                   //点击百度一下，进行搜索</span><br><span class="line">12         driver.quit();                                             //关闭浏览器</span><br><span class="line">13     &#125;</span><br><span class="line">14 &#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>示例代码详解：</p>
+<p>1、指定WebDriver 为ChromeDriver。</p>
+<p>2、打开百度主页。</p>
+<p>3、通过ID为kw来查找搜索框，其中findElement（）方法通过By.id（）在页面上查找指定的ID元素，并将查找的结果执行sendkeys操作，输入要搜索的值。</p>
+<p>4、在搜索框中输入字符串”selenium”。</p>
+<p>5、通过ID为su来查找搜索按钮，并执行click点击操作。</p>
+<p>6、触发搜索按钮的提交操作，进行搜索。</p>
+<p>7、关闭浏览器，结束测试。</p>
+<h2 id="二、By-Name"><a href="#二、By-Name" class="headerlink" title="二、By.Name()"></a>二、By.Name()</h2><p>在HTML中，name属性和ID属性功能基本相同，只是name属性不一定是唯一的。在selenium中，如果没有ID的话，首先考虑的就是name属性。</p>
+<p>以豆瓣网的主页搜索框为例子，其搜索框的HTML代码如下：</p>
+<p><img src="https://images2015.cnblogs.com/blog/965054/201610/965054-20161015185611890-455405694.png" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;text&quot; maxlength=&quot;60&quot; size=&quot;12&quot; placeholder=&quot;书籍、电影、音乐、小组、小站、成员&quot; name=&quot;q&quot; autocomplete=&quot;off&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>搜索框的name是”q”。</p>
+<p>在WebDriver中通过Name查找元素的java示例代码如下：</p>
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> 1 import org.openqa.selenium.By;</span><br><span class="line"> 2 import org.openqa.selenium.WebDriver;</span><br><span class="line"> 3 import org.openqa.selenium.WebElement;</span><br><span class="line"> 4 import org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"> 5 import org.testng.annotations.Test;</span><br><span class="line"> 6 public class findElementByName &#123;</span><br><span class="line"> 7     @Test</span><br><span class="line"> 8     public void test() &#123;</span><br><span class="line"> 9         WebDriver driver = new ChromeDriver();                     //打开chrome浏览器</span><br><span class="line">10         driver.get(&quot;http://www.douban.com&quot;);                       //输入网址</span><br><span class="line">11         WebElement serch=driver.findElement(By.name(&quot;q&quot;));         //生成WebElement实例对象serch</span><br><span class="line">12         serch.sendKeys(&quot;find element by name&quot;);                    //搜索框输入&quot;find element by name&quot;</span><br><span class="line">13         serch.submit();                                            //进行搜索</span><br><span class="line">14         driver.quit();                                             //关闭浏览器</span><br><span class="line">15     &#125;</span><br><span class="line">16 &#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>示例代码详解：</p>
+<p>1、指定WebDriver 为ChromeDriver。</p>
+<p>2、打开豆瓣主页。</p>
+<p>3、通过Name为q来调用findElemet()方法找到豆瓣主页的搜索框元素，并保存到WebElement实例对象中代码如下：</p>
+<p>WebElement search = driver.findElement(By.name(“q”));</p>
+<p>4、在搜索框中输入字符串find element by name 。</p>
+<p>5、通过submit()，进行搜索。</p>
+<p>6、结束测试，关闭浏览器。</p>
+<p>注意：submit和click的区别。Click方法只适用于button，而submit可以用于提交表单。</p>
+<h2 id="三、By-Xpath"><a href="#三、By-Xpath" class="headerlink" title="三、By.Xpath()"></a>三、By.Xpath()</h2><p>　　这个方法是非常强大的元素查找方式，使用这种方法几乎可以定位到页面上的任意元素。在正式开始使用XPath进行定位前，我们先了解下什么是XPath。XPath是XML Path的简称，由于HTML文档本身就是一个标准的XML页面，所以我们可以使用XPath的语法来定位页面元素。</p>
+<p>　　Xpath通过路径来定位控件，分为绝对路径和相对路径。绝对路径以单/号表示，相对路径则以//表示。当xpath的路径以/开头时，表示让Xpath解析引擎从文档的根节点开始解析。当xpath路径以//开头时，则表示让xpath引擎从文档的任意符合的元素节点开始进行解析。而当/出现在xpath路径中时，则表示寻找父节点的直接子节点，当//出现在xpath路径中时，表示寻找父节点下任意符合条件的子节点。弄清这个原则，就可以理解其实xpath的路径可以绝对路径和相对路径混合在一起来进行表示，想怎么玩就怎么玩。</p>
+<p>假设我们现在以下图所示HTML代码为例，要引用对应的对象，XPath语法如下：</p>
+<p><img src="https://images2015.cnblogs.com/blog/965054/201610/965054-20161016195438858-1538953055.png" alt="img"></p>
+<p>绝对路径写法(只有一种)，写法如下：</p>
+<p>引用页面上的form元素(即源码中的第3行)：/html/body/form</p>
+<p>下面是相对路径的引用写法：</p>
+<p>查找页面根元素：//</p>
+<p>查找页面上所有的input元素：//input</p>
+<p>查找页面上第一个form元素内的直接子input元素(即只包括form元素的下一级input元素)：//form/input</p>
+<p>查找页面上第一个form元素内的所有子input元素(只要在form元素内的input都算，不管还嵌套了多少个其他标签，使用相对路径表示，双//号)：//form//input</p>
+<p>查找页面上第一个form元素：//form</p>
+<p>查找页面上id为loginForm的form元素：//form[@id=’loginForm’]</p>
+<p>查找页面上具有name属性为username的input元素：//input[@name=’username’]</p>
+<p>查找页面上id为loginForm的form元素下的第一个input元素：//form[@id=’loginForm’]/input[1]</p>
+<p>查找页面具有name属性为contiune并且type属性为button的input元素：//input[@name=’continue’][@type=’button’]</p>
+<p>查找页面上id为loginForm的form元素下第4个input元素：//form[@id=’loginForm’]/input[4]</p>
+<p>以百度主页为例，搜索框的HTML示例代码如下，其xpath为//*[@id=’’kw]。</p>
+<p><img src="https://images2015.cnblogs.com/blog/965054/201610/965054-20161015182720343-47976892.png" alt="img"></p>
+<p>在WebDriver中通过Xpath查找元素的java示例代码如下：</p>
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> 1 import org.openqa.selenium.By;</span><br><span class="line"> 2 import org.openqa.selenium.WebDriver;</span><br><span class="line"> 3 import org.openqa.selenium.WebElement;</span><br><span class="line"> 4 import org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"> 5 import org.testng.annotations.Test;</span><br><span class="line"> 6 public class findElementByXpath &#123;</span><br><span class="line"> 7     @Test</span><br><span class="line"> 8     public void test() &#123;</span><br><span class="line"> 9         WebDriver driver = new ChromeDriver();                         　  //打开chrome浏览器</span><br><span class="line">10         driver.get(&quot;http://www.baidu.com&quot;);                      　　    　 //输入网址</span><br><span class="line">11         WebElement serch=driver.findElement(By.xpath(&quot;//*[@id=&apos;kw&apos;&quot;));　　  //生成WebElement实例对象serch</span><br><span class="line">12         serch.sendKeys(&quot;find element by xpath&quot;);                    　　　　//搜索框输入&quot;find element by xpath&quot;</span><br><span class="line">13         serch.submit();                                             　　　　//进行搜索</span><br><span class="line">14         driver.quit();                                             　 　　　//关闭浏览器</span><br><span class="line">15     &#125;</span><br><span class="line">16 &#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>示例代码详解：</p>
+<p>1、指定WebDriver 为ChromeDriver。</p>
+<p>2、打开百度主页。</p>
+<p>3、通过Xpath为//*[@id=’’kw]来调用findElemet()方法找到百度主页的搜索框元素，并保存到WebElement实例对象中代码如下：</p>
+<p>WebElement search = driver.findElement(By.xpath(“//*[@id=’’kw]”));</p>
+<p>4、在搜索框中输入字符串find element by xpath。</p>
+<p>5、通过submit()，进行搜索。</p>
+<p>6、结束测试，关闭浏览器。</p>
+<h2 id="四、By-tagName"><a href="#四、By-tagName" class="headerlink" title="四、By.tagName()"></a>四、By.tagName()</h2><p>　　通过TagName来查找元素的方式与之前的通过ID或者Name查找元素的方式略有不同。其原因是同一个页面上具有相同的TagName的元素就会返回多个结果，因此建议在使用TagName为查找元素的条件时，使用findElements()来替代findElement()函数。</p>
+<p>以126为例，TagName为input的HTML事例代码如下：</p>
+<p><img src="https://images2015.cnblogs.com/blog/965054/201610/965054-20161016201821592-532920344.png" alt="img"></p>
+<p>通过TagName为script的元素个数的示例代码如下</p>
+<p>在WebDriver中查找TagName为input的元素个数的java示例代码如下：</p>
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> 1 import java.util.List;</span><br><span class="line"> 2 </span><br><span class="line"> 3 import org.openqa.selenium.By;</span><br><span class="line"> 4 import org.openqa.selenium.WebDriver;</span><br><span class="line"> 5 import org.openqa.selenium.WebElement;</span><br><span class="line"> 6 import org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"> 7 import org.testng.annotations.Test;</span><br><span class="line"> 8 </span><br><span class="line"> 9 public class findElementByTagName &#123;</span><br><span class="line">10     @Test</span><br><span class="line">11     public void test() &#123;</span><br><span class="line">12         WebDriver driver = new ChromeDriver(); // 打开chrome浏览器</span><br><span class="line">13         driver.get(&quot;http://www.126.com&quot;); // 输入网址</span><br><span class="line">14         List&lt;WebElement&gt; allInputs = driver.findElements(By.tagName(&quot;input&quot;)); // 生成WebElement实例对象allInputs</span><br><span class="line">15         System.out.println(allInputs.size()); // 输出tagName为input的个数</span><br><span class="line">16         driver.quit(); // 关闭浏览器</span><br><span class="line">17     &#125;</span><br><span class="line">18 &#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>示例代码详解：</p>
+<p>1、指定WebDriver 为ChromeDriver。</p>
+<p>2、通过TagName为input来调用findElements()方法，找到126主页上所有的input元素并保存到WebElement实例对象列表中，代码如下：</p>
+<p>List<webelement> allInputs= driver.findElements(By.tagName(“input”));</webelement></p>
+<p>3、打印126主页上TagName为input的元素的数量</p>
+<p>4、结束测试，关闭浏览器。</p>
+<p>从html中我们可以看到，文本框和密码框的元素标签都是input，此时单靠tagName无法准确地得到我们想要的元素，需要结合type属性才能过滤出我们要的元素。</p>
+<p>示例代码如下：</p>
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> 1 import java.util.List;</span><br><span class="line"> 2 </span><br><span class="line"> 3 import org.openqa.selenium.By;</span><br><span class="line"> 4 import org.openqa.selenium.WebDriver;</span><br><span class="line"> 5 import org.openqa.selenium.WebElement;</span><br><span class="line"> 6 import org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"> 7 import org.testng.annotations.Test;</span><br><span class="line"> 8 </span><br><span class="line"> 9 public class findElementByTagName &#123;</span><br><span class="line">10     @Test</span><br><span class="line">11     public void test() &#123;</span><br><span class="line">12         WebDriver driver = new ChromeDriver(); // 打开chrome浏览器</span><br><span class="line">13         driver.get(&quot;http://www.126.com&quot;); // 输入网址</span><br><span class="line">14         List&lt;WebElement&gt; allInputs = driver.findElements(By.tagName(&quot;input&quot;)); // 生成WebElement实例对象allInputs</span><br><span class="line">15         System.out.println(allInputs.size()); // 输出tagName为input的个数</span><br><span class="line">16         for (WebElement e : allInputs) &#123; // 循环</span><br><span class="line">17             if (e.getAttribute(&quot;type&quot;).equals(&quot;text&quot;)) &#123; // 判断</span><br><span class="line">18                 e.sendKeys(&quot;abcde&quot;); // 输入&quot;abcde&quot;</span><br><span class="line">19             &#125;</span><br><span class="line">20         &#125;</span><br><span class="line">21         driver.quit(); // 关闭浏览器</span><br><span class="line">22     &#125;</span><br><span class="line">23 &#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<h2 id="五、By-className"><a href="#五、By-className" class="headerlink" title="五、By.className()"></a>五、By.className()</h2><p>className属性是利用元素的css样式表所引用的伪类名称来进行元素查找的方法。</p>
+<p>以淘宝主页搜索框为例，其HTML如下：</p>
+<p><img src="https://images2015.cnblogs.com/blog/965054/201610/965054-20161016205044749-693172895.png" alt="img"></p>
+<p>通过className获取搜索框的java代码如下：</p>
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> 1 import org.openqa.selenium.By;</span><br><span class="line"> 2 import org.openqa.selenium.WebDriver;</span><br><span class="line"> 3 import org.openqa.selenium.WebElement;</span><br><span class="line"> 4 import org.openqa.selenium.chrome.ChromeDriver;</span><br><span class="line"> 5 import org.testng.annotations.Test;</span><br><span class="line"> 6 </span><br><span class="line"> 7 public class findElementByclassName &#123;</span><br><span class="line"> 8     @Test</span><br><span class="line"> 9     public void test() &#123;</span><br><span class="line">10         WebDriver driver = new ChromeDriver(); // 打开chrome浏览器</span><br><span class="line">11         driver.get(&quot;http://www.taobao.com&quot;); // 输入网址</span><br><span class="line">12         WebElement e = driver.findElement(By.className(&quot;search-combobox-input&quot;)); // 实例化对象</span><br><span class="line">13         e.sendKeys(&quot;find element by className&quot;); // 输入find element by className</span><br><span class="line">14         e.submit();                                //搜索</span><br><span class="line">15         driver.quit(); // 关闭浏览器</span><br><span class="line">16     &#125; </span><br><span class="line">17 &#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>示例代码详解：</p>
+<p>1、指定WebDriver 为ChromeDriver。</p>
+<p>2、打开淘宝主页。</p>
+<p>3、通过className为search-combobox-input来调用findElemet()方法找到淘宝主页的搜索框元素，并保存到WebElement实例对象中。</p>
+<p>4、在搜索框中输入字符串find element by className。</p>
+<p>5、通过submit()，进行搜索。</p>
+<p>6、结束测试，关闭浏览器。</p>
+<h2 id="六、By-CssSelector"><a href="#六、By-CssSelector" class="headerlink" title="六、By.CssSelector()"></a>六、By.CssSelector()</h2><p>CssSelector，Selenium官网的Document里极力推荐使用CSS  locator，而不是XPath来定位元素，原因是CSS locator比XPath  locator速度快，特别是在IE下面（IE没有自己的XPath  解析器(Parser)）他比xpath更高效更准确更易编写，因为前端开发人员就是用CSS  Selector设置页面上每一个元素的样式，无论那个元素的位置有多复杂，他都能定位到，那我们使用CSS  Selector肯定也能非常精准的定位到页面Elements。</p>
+<p>css定位可以分为四类：id、class、tagName、其他属性、路径。</p>
+<p>1 #id方式</p>
+<p>两种方式，可以在前面加上tag名称，也可以不加</p>
+<p>driver.findElement(By.cssSelector(“#id_value”)) 相当于使用id语法的driver.findElement(By.id(“id_value”)) </p>
+<p>driver.findElement(By.cssSelector(“tag_name#id_value”)) 相当于使用xpath语法的driver.findElement(By.xpath(“//tag_name[@id=’id_value’]”)) </p>
+<p>以百度主页为例，搜索框的HTML示例代码如下，</p>
+<p><img src="https://images2018.cnblogs.com/blog/965054/201808/965054-20180807151434029-1359618949.png" alt="img"></p>
+<p><img src="https://images2018.cnblogs.com/blog/965054/201808/965054-20180807151451689-1832406550.png" alt="img"></p>
+<p> 通过CssSelector的#id方式的java代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`import` `org.openqa.selenium.By;``import` `org.openqa.selenium.WebDriver;``import` `org.openqa.selenium.WebElement;``import` `org.openqa.selenium.chrome.ChromeDriver;``import` `org.testng.annotations.Test;` `public` `class` `FindElemenByCssSelector &#123;``  ``@Test``  ``public` `void` `test() &#123;``    ``WebDriver driver = ``new` `ChromeDriver(); ``// 打开chrome浏览器``    ``driver.get(``&quot;http://www.baidu.com&quot;``); // 输入网址``    ``WebElement e = driver.findElement(By.cssSelector(``&quot;#kw&quot;``)); ``// 实例化对象``    ``e.sendKeys(``&quot;find element by CssSelector&quot;``); ``// 输入find element by CssSelector``    ``driver.findElement(By.cssSelector(``&quot;input#su&quot;``)).click();``// 点击百度一下``    ``driver.quit(); ``// 关闭浏览器``  ``&#125;``&#125;`</span><br></pre></td></tr></table></figure>
+
+<p>示例代码详解：</p>
+<p>实例化对象一行，使用CssSelector中的#id方式</p>
+<p>点击百度一下那一行，使用CssSelector中的tagName#id方式</p>
+<p>2 class方式 </p>
+<p>两种方式，前面加上tag名称，也可以不加。如果不加tag名称时，点不能省略。</p>
+<p>driver.findElement(By.cssSelector(“.class_value”)) </p>
+<p>driver.findElement(By.cssSelector(“tag_name.class_value”)) </p>
+<p>有的class_value比较长，而且中间有空格时，不能把空格原样写进去，那样不能识别。这时，空格用点代替，前面要加上tag_name。</p>
+<p>如下driver.findElement(By.cssSelector(“tag_name.class_value1.calss_value2.class_value3”)) </p>
+<p>以百度主页为例，搜索框的HTML示例代码如下</p>
+<p><img src="https://images2018.cnblogs.com/blog/965054/201808/965054-20180807151434029-1359618949.png" alt="img"></p>
+<p><img src="https://images2018.cnblogs.com/blog/965054/201808/965054-20180807151451689-1832406550.png" alt="img"></p>
+<p> 通过CssSelector的.class方式的java代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`import` `org.openqa.selenium.By;``import` `org.openqa.selenium.WebDriver;``import` `org.openqa.selenium.WebElement;``import` `org.openqa.selenium.chrome.ChromeDriver;``import` `org.testng.annotations.Test;` `public` `class` `FindElemenByCssSelector &#123;``  ``@Test``  ``public` `void` `test() &#123;``    ``WebDriver driver = ``new` `ChromeDriver(); ``// 打开chrome浏览器``    ``driver.get(``&quot;http://www.baidu.com&quot;``); // 输入网址``    ``WebElement e = driver.findElement(By.cssSelector(``&quot;.s_ipt&quot;``)); ``// 实例化对象``    ``e.sendKeys(``&quot;find element by CssSelector&quot;``); ``// 输入find element by CssSelector``    ``driver.findElement(By.cssSelector(``&quot;input.bg.s_btn&quot;``)).click();``// 点击百度一下``    ``driver.quit(); ``// 关闭浏览器``  ``&#125;``&#125;`</span><br></pre></td></tr></table></figure>
+
+<p>示例代码详解：</p>
+<p>其中实例化一行，使用.class方式获取对象</p>
+<p>点击百度一下一样，使用tagName.class_value1.class_value2方式获取对象。</p>
+<p>3 tagName方式</p>
+<p>driver.findElement(By.cssSelector(“input”)</p>
+<p>其中tagName是input</p>
+<p>4 根据元素属性</p>
+<p>1)精准匹配： </p>
+<p>[A]  driver.findElement(By.cssSelector(“input[name=username]”));属性名=属性值,id,class,等都可写成这种形式</p>
+<p>[B]  driver.findElement(By.cssSelector(“input[type=’submit’][value=’Login’]”));多属性</p>
+<p>2)模糊匹配：（正则表达式匹配属性）</p>
+<p>[A]  ^=      driver.findElement(By.cssSelector(Input[id ^=’ctrl’]));匹配到id头部 如ctrl_12</p>
+<p>[B]  $=      driver.findElement(By.cssSelector(Input[id $=’ctrl’]));匹配到id尾部 如a_ctrl</p>
+<p>[C]  *=      driver.findElement(By.cssSelector(Input[id *= ‘ctrl’]));匹配到id中间如1_ctrl_12</p>
+<p>5 子元素方式**<br>**</p>
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;form id=&quot;form&quot; class=&quot;fm&quot; name=&quot;f&quot;&gt;</span><br><span class="line">　　&lt;span id=&quot;s_kw_wrap&quot; class=&quot;bg s_ipt_wr quickdelete-wrap&quot;&gt;</span><br><span class="line">　　　　&lt;input id=&quot;kw&quot; class=&quot;s_ipt&quot; type=&quot;text&quot; autocomplete=&quot;off&quot; maxlength=&quot;100&quot; name=&quot;wd&quot;&gt;</span><br><span class="line">　　&lt;/span&gt;</span><br><span class="line">　　&lt;span id=&quot;s_btn_wr&quot; class=&quot;btn_wr s_btn_wr bg&quot;&gt;</span><br><span class="line">　　　　&lt;input id=&quot;su&quot; class=&quot;btn self-btn bg s_btn&quot; type=&quot;submit&quot; value=&quot;百度一下&quot;&gt;</span><br><span class="line">　　&lt;/span&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p><a href="javascript:void(0);" target="_blank" rel="noopener"><img src="https://common.cnblogs.com/images/copycode.gif" alt="复制代码"></a></p>
+<p>以上代码是百度首页搜索输入框和按钮的html，下面讲解以此为例</p>
+<p>　　1)子元素  A&gt;B</p>
+<p>　　　　WebElement input= driver.findElement(By.cssSelector(“form&gt;span&gt;input”));//搜索输入框</p>
+<p>　　2)后代元素  A空格B</p>
+<p>　　　　WebElement input= driver.findElement(By.cssSelector(“form input”));//搜索输入框</p>
+<p>　　3)第一个后代元素　　:first-child</p>
+<p>　　　　WebElement span= driver.findElemet(By.cssSelector(“form :first-child”));//冒号前有空格，定位到form下所有级别的第一个子元素</p>
+<p>　　　　　　可定位到三个元素：&lt;span id=”s_kw_wrap”…/&gt; &lt;input id=”kw”…./&gt; &lt;input id=”su”………/&gt;</p>
+<p>　　　　WebElement span= driver.findElemet(By.cssSelector(“form input:first-child”));//冒号前无空格，定位到form下所有级别的第一个input元素</p>
+<p>　　　　　　可定位到两个元素：&lt;input id=”kw”…./&gt; &lt;input id=”su”………/&gt;</p>
+<p>　　　　WebElement span= driver.findElemet(By.cssSelector(“form&gt;span:first-child”));//冒号前无空格，定位到form直接子元素中的第一个span元素</p>
+<p>　　　　　　可定位到一个元素：&lt;span id=”s_kw_wrap”…/&gt;</p>
+<p>　　4)最后一个子元素  :last-child [类同:first-child]</p>
+<p>　　　　WebElement userName = driver.findEleme(By.cssSelector(“form :last-child”));//冒号前有空格，定位到form下所有级别的第一个子元素</p>
+<p>　　5)第2个子元素   :nth-child(N) [类同:first-child]</p>
+<p>　　　　WebElement userName = driver.findElemet(By.cssSelector(“form#form :nth-child(2)”));//冒号前有空格，定位到form下所有级别的第二个子元素</p>
+<h2 id="七、By-linkText"><a href="#七、By-linkText" class="headerlink" title="七、By.linkText()"></a>七、By.<strong>linkText</strong>()</h2><p>这个方法比较直接，即通过超文本链接上的文字信息来定位元素，这种方式一般专门用于定位页面上的超文本链接。</p>
+<p>以百度主页为例，搜索框的HTML示例代码如下</p>
+<p><img src="https://images2018.cnblogs.com/blog/965054/201808/965054-20180807163631167-206471954.png" alt="img"></p>
+<p> 通过linkTest方式的java代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`import` `org.openqa.selenium.By;``import` `org.openqa.selenium.WebDriver;``import` `org.openqa.selenium.WebElement;``import` `org.openqa.selenium.chrome.ChromeDriver;``import` `org.testng.annotations.Test;` `public` `class` `FindElemenByCssSelector &#123;``  ``@Test``  ``public` `void` `test() &#123;``    ``WebDriver driver = ``new` `ChromeDriver(); ``// 打开chrome浏览器``    ``driver.get(``&quot;http://www.baidu.com&quot;``); // 输入网址``    ``WebElement a= driver.findElement(By.linkText(``&quot;新闻&quot;``));``    ``a.click();``  ``&#125;``&#125;`</span><br></pre></td></tr></table></figure>
+
+<p>　</p>
+<h2 id="八、By-partialLinkText"><a href="#八、By-partialLinkText" class="headerlink" title="八、By.partialLinkText()"></a>八、By.<strong>partialLinkText</strong>()</h2><p>这个方法是上一个方法的扩展。当你不能准确知道超链接上的文本信息或者只想通过一些关键字进行匹配时，可以使用这个方法来通过部分链接文字进行匹配。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`import` `org.openqa.selenium.By;``import` `org.openqa.selenium.WebDriver;``import` `org.openqa.selenium.WebElement;``import` `org.openqa.selenium.chrome.ChromeDriver;``import` `org.testng.annotations.Test;` `public` `class` `FindElemenByCssSelector &#123;``  ``@Test``  ``public` `void` `test() &#123;``    ``WebDriver driver = ``new` `ChromeDriver(); ``// 打开chrome浏览器``    ``driver.get(``&quot;http://www.baidu.com&quot;``); // 输入网址``    ``WebElement a= driver.findElement(By.partialLinkText(``&quot;新&quot;``));``    ``a.click();``  ``&#125;``&#125;`</span><br></pre></td></tr></table></figure>
+
+<p>参考文档：<a href="http://www.cnblogs.com/qingchunjun/p/4208159.html" target="_blank" rel="noopener">http://www.cnblogs.com/qingchunjun/p/4208159.html</a></p>
+<p>​         <a href="https://www.cnblogs.com/sylvia-liu/p/4469597.html" target="_blank" rel="noopener"> https://www.cnblogs.com/sylvia-liu/p/4469597.html</a></p>
+<p><a href="http://www.cnblogs.com/hustar0102/" target="_blank" rel="noopener">版权所有，欢迎转载，转载请注明出处：http://www.cnblogs.com/hustar0102/</a></p>
+
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+          <a href="/blog/2019/10/19/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+
+        <!--<div class="otherLink">-->
+          <!--<div class="previous">-->
+          <!--</div>-->
+          <!--<div class="next">-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="comments" id="comments">-->
+          <!--
+-->
+        <!--</div>-->
+      <!--https://github.com/luuman/hexo-theme-spfk/blob/master/layout/_partial/post/nav.ejs-->
+      
+<nav id="article-nav">
+  
+    <a href="/blog/2019/11/18/待发布-汇总/daily-Note/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          daily_Note
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2019/11/12/待发布-汇总/selenium自动化框架搭建-一/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">selenium自动化框架搭建(一)</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+      </div>
+      <!--<div class="post-nav">-->
+          <!--<div class="post-nav-next post-nav-item">-->
+              <!--<a href="" rel="next" title="将Hexo博客主题更换为NexT主题">-->
+                <!--<i class="fa fa-chevron-left"></i>-->
+                 <!--将Hexo博客主题更换为NexT主题-->
+              <!--</a>-->
+          <!--</div>-->
+          <!--<span class="post-nav-divider"></span>-->
+          <!--<div class="post-nav-prev post-nav-item">-->
+              <!--<a href="" rel="prev" title="在这里">-->
+                <!--在这里 <i class="fa fa-chevron-right"></i>-->
+              <!--</a>-->
+          <!--</div>-->
+        <!--</div>-->
+    </div>
+   
+</main>
+<div class="footer">
+  <div class="info">
+    <!--<p>-->
+    <!--<a href="https://hexo.io"> Hexo </a> 强力驱动 |-->
+      <!--<a href="https://github.com/Youthink/hexo-themes-yearn"> Yearn </a>-->
+      <!--主题-->
+    <!--</p>-->
+    <p>&copy;2019-2020 90后小子的博客</p>
+  </div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>//console
+  var consoleConfig = '\n欢迎访问(づ｡◕‿‿◕｡)づ！\n,\n小白一个，欢迎学习交流~~~ 🎉🎉🎉 \n'.split(',');
+  var canConsole = true;
+  var consoleInfo = (function(consoleConfig) {
+  if (!canConsole || !consoleConfig || consoleConfig.length < 1) {
+    return;
+  }
+  var consoleColor = '#6190e8';
+  var _console;
+  var backgroundTextStyle = 'padding: 1px 5px;color: #fff;background: ' + consoleColor + ';'
+  var textStyle = 'color: ' + consoleColor + ';';
+
+  consoleConfig.map(o => {
+    var num = (o.match(/%c/g) || []).length;
+    if(/^http(s)?:\/\//.test(o)) {
+      console.log('%c     ', 'background: url(' + o + ') no-repeat left center;font-size: 180px;');
+      return;
+    }
+    if (num > 0) {
+      var logArguments = [];
+      for (var i = 0; i < num; i++) {
+        if (i % 2 === 0) {
+          logArguments.push(backgroundTextStyle);
+        } else {
+          logArguments.push(textStyle);
+        }
+      }
+      (_console = console).log.apply(_console, ['%c' + o, textStyle].concat(logArguments));
+      return;
+    }
+    console.log('%c' + o, textStyle);
+  });
+}(consoleConfig));</script><script type="text/javascript" src="/blog/./js/main.js"></script>
+
+  <script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-2" count="10" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script src="//at.alicdn.com/t/font_159214_mvtxvg9me9.js"></script>
+</body>
+</html>

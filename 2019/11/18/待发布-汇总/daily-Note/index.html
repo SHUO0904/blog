@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="/blog/./style/main.css">
 	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-	<title>REST 和 RESTful API</title>
+	<title>daily_Note</title>
   
   
 </head>
@@ -32,7 +32,7 @@
     
   
   <h1 class="title">
-    REST 和 RESTful API
+    daily_Note
   </h1>
   
 
@@ -40,11 +40,11 @@
     <ul class="article-info">
       <li>
         发布
-        <time datetime="2019-10-29T11:48:08.000Z" itemprop="datePublished">2019-10-29</time>
+        <time datetime="2019-11-18T09:56:00.000Z" itemprop="datePublished">2019-11-18</time>
       </li>
       <li>
         
-    更新 <time datetime="2019-10-30T12:23:16.457Z" itemprop="dateUpdated">2019-10-30</time>
+    更新 <time datetime="2019-11-18T09:57:50.590Z" itemprop="dateUpdated">2019-11-18</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -56,38 +56,10 @@
     <div class="article">
       <div class="content">
         
-        <hr>
-<h2 id="Rest"><a href="#Rest" class="headerlink" title="Rest"></a>Rest</h2><ul>
-<li>Rest是 REpresentational State Transfer，即表现层状态转化。</li>
-</ul>
-<ol>
-<li>“表现层”指“资源”的“表现层“。把“资源”具体呈现出来的形式，叫做它的“表现层”。</li>
-<li>所谓”资源“，指网络中一个实体或者说网络上的一个具体信息。如:文本、图片等。</li>
-<li>所谓“转移”，代表客户端和服务器一个互动过程，过程中，涉及数据和状态的变化。</li>
-<li>互联网通信协议HTTP协议，是一个无状态的协议。这意味着，所有的状态都保存在服务器端。若客户端想要操作服务器，需通过某种手段，让服务换发生“状态转化”(State Transfer)。而这种转化是建立在表现层之上，叫做“表现层状态转化”</li>
-<li>客户端用到的手段，是HTTP协议中的四个操作方式的动词：GET、POST、PUT、DELETE，分别对应四种基本操作，GET用来获取资源，POST用来新建资源(可用户更新资源)，PUT用来更新资源，DELETE用来删除资源。<br>URL定位资源，直接映射到HTTP中已实现的GET，POST，Delete，PUT方法</li>
+        <ol>
+<li>selenium –增加options.add_experimental_option(‘excludeSwitches’, [‘enable-automation’]) #隐藏脚本为selenium</li>
+<li></li>
 </ol>
-<hr>
-<ul>
-<li>REST成熟度的四个层次</li>
-<li>第一个层次的web服务，是使用HTTP作为传输方式，实际上远程方法调用(RPC)的具体形式，SOAP和XML-RPC属于此类</li>
-<li>第二个层次的web服务，引入了资源的概念，每个资源有对应的标识符和表达。</li>
-<li>第三个层次的web服务，使用不同的HTTP方法进行不同 操作，并且使用HTTP状态码表示不同的结果。如:HTTP和Get方法来获取资源、DELETE方法来删除资源</li>
-<li>第四个层次的web服务，使用HATEOAS,在资源的表达中包含了链接信息。客户端可根据链接发现可执行的动作</li>
-</ul>
-<h2 id="Restful-Api"><a href="#Restful-Api" class="headerlink" title="Restful Api"></a>Restful Api</h2><ul>
-<li>REST描述的是网络中client和server的一种交互形式；RESTful API是一种REST风格的网络</li>
-</ul>
-<ol>
-<li>URL的根路径，如：<a href="http://api.****.com/v1" target="_blank" rel="noopener">http://api.****.com/v1</a></li>
-<li>需要有api版本信息，如：v1</li>
-<li>URL中使用名词指定资源，不用动词，且推荐使用复数，如：<a href="http://api.****.com/v1/books" target="_blank" rel="noopener">http://api.****.com/v1/books</a></li>
-<li>使用HTTP协议里的动词来实现资源的添加，修改，删除，更新。包括，GET、POST、PUT、DELETE</li>
-<li>使用正确的HTTP Status Code返回状态码，包括：2××=success(成功)、3××=Redirect(重定向)、4××=客户端错误、5××=服务端错误</li>
-</ol>
-<ul>
-<li>综上，RESTful API是无状态，请求URL=动作(GET/POST/PUT/DELETE)+资源，响应使用精确的状态码和JSON格式数据</li>
-</ul>
 
       </div>
         <div class="support-author">
@@ -121,18 +93,18 @@
       
 <nav id="article-nav">
   
-    <a href="/blog/2019/10/30/requests-python/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2019/11/26/进程与线程的理解/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          【Python】 requests请求
+          进程与线程的理解
         
       </div>
     </a>
   
   
-    <a href="/blog/2019/10/26/Git/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Git 介绍和使用</div>
+    <a href="/blog/2019/11/16/待发布-汇总/selenium定位元素整理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">selenium定位元素整理</div>
       <strong class="article-nav-caption">></strong>
     </a>
   

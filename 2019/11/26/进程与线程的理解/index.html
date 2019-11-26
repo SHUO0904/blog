@@ -15,7 +15,7 @@
   <link rel="stylesheet" type="text/css" href="/blog/./style/main.css">
 	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-	<title>REST 和 RESTful API</title>
+	<title>进程与线程的理解</title>
   
   
 </head>
@@ -32,7 +32,7 @@
     
   
   <h1 class="title">
-    REST 和 RESTful API
+    进程与线程的理解
   </h1>
   
 
@@ -40,11 +40,11 @@
     <ul class="article-info">
       <li>
         发布
-        <time datetime="2019-10-29T11:48:08.000Z" itemprop="datePublished">2019-10-29</time>
+        <time datetime="2019-11-26T04:28:20.000Z" itemprop="datePublished">2019-11-26</time>
       </li>
       <li>
         
-    更新 <time datetime="2019-10-30T12:23:16.457Z" itemprop="dateUpdated">2019-10-30</time>
+    更新 <time datetime="2019-11-26T04:53:22.362Z" itemprop="dateUpdated">2019-11-26</time>
 
       </li>
       <li id="busuanzi_container_page_pv">
@@ -56,37 +56,53 @@
     <div class="article">
       <div class="content">
         
-        <hr>
-<h2 id="Rest"><a href="#Rest" class="headerlink" title="Rest"></a>Rest</h2><ul>
-<li>Rest是 REpresentational State Transfer，即表现层状态转化。</li>
+        <ul>
+<li><p>进程（process）和线程（thread）是操作系统的基本概念，但是它们比较抽象，不容易掌握。</p>
+<p>最近，我读到一篇材料，发现有一个很好的类比，可以把它们解释地清晰易懂。</p>
+</li>
 </ul>
 <ol>
-<li>“表现层”指“资源”的“表现层“。把“资源”具体呈现出来的形式，叫做它的“表现层”。</li>
-<li>所谓”资源“，指网络中一个实体或者说网络上的一个具体信息。如:文本、图片等。</li>
-<li>所谓“转移”，代表客户端和服务器一个互动过程，过程中，涉及数据和状态的变化。</li>
-<li>互联网通信协议HTTP协议，是一个无状态的协议。这意味着，所有的状态都保存在服务器端。若客户端想要操作服务器，需通过某种手段，让服务换发生“状态转化”(State Transfer)。而这种转化是建立在表现层之上，叫做“表现层状态转化”</li>
-<li>客户端用到的手段，是HTTP协议中的四个操作方式的动词：GET、POST、PUT、DELETE，分别对应四种基本操作，GET用来获取资源，POST用来新建资源(可用户更新资源)，PUT用来更新资源，DELETE用来删除资源。<br>URL定位资源，直接映射到HTTP中已实现的GET，POST，Delete，PUT方法</li>
+<li>计算机的核心是CPU，它承担了所有的计算任务。它就像一座工厂，时刻在运行。 </li>
 </ol>
-<hr>
-<ul>
-<li>REST成熟度的四个层次</li>
-<li>第一个层次的web服务，是使用HTTP作为传输方式，实际上远程方法调用(RPC)的具体形式，SOAP和XML-RPC属于此类</li>
-<li>第二个层次的web服务，引入了资源的概念，每个资源有对应的标识符和表达。</li>
-<li>第三个层次的web服务，使用不同的HTTP方法进行不同 操作，并且使用HTTP状态码表示不同的结果。如:HTTP和Get方法来获取资源、DELETE方法来删除资源</li>
-<li>第四个层次的web服务，使用HATEOAS,在资源的表达中包含了链接信息。客户端可根据链接发现可执行的动作</li>
-</ul>
-<h2 id="Restful-Api"><a href="#Restful-Api" class="headerlink" title="Restful Api"></a>Restful Api</h2><ul>
-<li>REST描述的是网络中client和server的一种交互形式；RESTful API是一种REST风格的网络</li>
-</ul>
-<ol>
-<li>URL的根路径，如：<a href="http://api.****.com/v1" target="_blank" rel="noopener">http://api.****.com/v1</a></li>
-<li>需要有api版本信息，如：v1</li>
-<li>URL中使用名词指定资源，不用动词，且推荐使用复数，如：<a href="http://api.****.com/v1/books" target="_blank" rel="noopener">http://api.****.com/v1/books</a></li>
-<li>使用HTTP协议里的动词来实现资源的添加，修改，删除，更新。包括，GET、POST、PUT、DELETE</li>
-<li>使用正确的HTTP Status Code返回状态码，包括：2××=success(成功)、3××=Redirect(重定向)、4××=客户端错误、5××=服务端错误</li>
+<p><img src="%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg01.jpg" alt=" "></p>
+<ol start="2">
+<li><p>假定工厂的电力有限，一次只能供给一个车间使用。也就是说，一个车间开工的时候，其他车间都必须停工。背后的含义就是，单个CPU一次只能运行一个任务。 </p>
+<p><img src="%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg02.png" alt></p>
+</li>
+<li><p>进程就好比工厂的车间，它代表CPU所能处理的单个任务。任一时刻，CPU总是运行一个进程，其他进程处于非运行状态。 </p>
+<p><img src="%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg2013042403.jpg" alt></p>
+</li>
+<li><p>一个车间里，可以有很多工人。他们协同完成一个任务。 </p>
+<p><img src="%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg2013042404.jpg" alt></p>
+</li>
+<li><p>线程就好比车间里的工人。一个进程可以包括多个线程。 </p>
+<p><img src="%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg2013042405.jpg" alt></p>
+</li>
+<li><p>车间的空间是工人们共享的，比如许多房间是每个工人都可以进出的。这象征一个进程的内存空间是共享的，每个线程都可以使用这些共享内存 </p>
+<p><img src="%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg2013042406.png" alt></p>
+</li>
+<li><p>可是，每间房间的大小不同，有些房间最多只能容纳一个人，比如厕所。里面有人的时候，其他人就不能进去了。这代表一个线程使用某些共享内存时，其他线程必须等它结束，才能使用这一块内存。 </p>
+<p><img src="%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg2013042407.jpg" alt></p>
+</li>
+<li><p>一个防止他人进入的简单方法，就是门口加一把锁。先到的人锁上门，后到的人看到上锁，就在门口排队，等锁打开再进去。这就叫<a href="https://baike.baidu.com/item/互斥锁/841823?fr=aladdin" target="_blank" rel="noopener">“互斥锁”</a>（Mutual exclusion，缩写 Mutex），防止多个线程同时读写某一块内存区域。 </p>
+<p><img src="%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg2013042408.jpg" alt></p>
+</li>
+<li><p>还有些房间，可以同时容纳n个人，比如厨房。也就是说，如果人数大于n，多出来的人只能在外面等着。这好比某些内存区域，只能供给固定数目的线程使用。 </p>
+<p><img src="%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg2013042409.jpg" alt></p>
+</li>
+<li><p>这时的解决方法，就是在门口挂n把钥匙。进去的人就取一把钥匙，出来时再把钥匙挂回原处。后到的人发现钥匙架空了，就知道必须在门口排队等着了。这种做法叫做<a href="http://en.wikipedia.org/wiki/Semaphore_(programming)" target="_blank" rel="noopener">“信号量”</a>（Semaphore），用来保证多个线程不会互相冲突。</p>
+<p>不难看出，mutex是semaphore的一种特殊情况（n=1时）。也就是说，完全可以用后者替代前者。但是，因为mutex较为简单，且效率高，所以在必须保证资源独占的情况下，还是采用这种设计。</p>
+<p><img src="E:%5CMyBlog%5Cblog%5Csource_posts%5C%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg2013042410.jpg" alt></p>
+</li>
+<li><p>操作系统的设计，因此可以归结为三点：</p>
+<p>（1）以多进程形式，允许多个任务同时运行；</p>
+<p>（2）以多线程形式，允许单个任务分成不同的部分运行；</p>
+<p>（3）提供协调机制，一方面防止进程之间和线程之间产生冲突，另一方面允许进程之间和线程之间共享资源。</p>
+<p><img src="E:%5CMyBlog%5Cblog%5Csource_posts%5C%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3%5Cbg2013042411.png" alt></p>
+</li>
 </ol>
 <ul>
-<li>综上，RESTful API是无状态，请求URL=动作(GET/POST/PUT/DELETE)+资源，响应使用精确的状态码和JSON格式数据</li>
+<li>转载自 <a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html</a> </li>
 </ul>
 
       </div>
@@ -121,18 +137,9 @@
       
 <nav id="article-nav">
   
-    <a href="/blog/2019/10/30/requests-python/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          【Python】 requests请求
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2019/10/26/Git/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Git 介绍和使用</div>
+    <a href="/blog/2019/11/18/待发布-汇总/daily-Note/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">daily_Note</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
