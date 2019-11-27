@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="keywords" content="90后小子,个人博客,blog">
+  <meta name="description" content="90后小子的个人博客">
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="dns-prefetch" href="https://busuanzi.ibruce.info">
+  <link rel="dns-prefetch" href="https://at.alicdn.com">
+  
+  
+  
+  <link rel="stylesheet" type="text/css" href="/blog/./style/main.css">
+	<link rel="shortcut icon" href="/favicon.ico" title="Favicon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+	<title>Seesion和Cookie的区别</title>
+  
+  
+</head>
+<body>
+  <canvas id="pattern-placeholder" height="230"></canvas>
+<div class="navbar-header">
+  <a class="blog-title" href="/blog/">HOME</a>
+  <a class="face-img" href="/blog/">
+    <img src="/blog/./img/icon-touxiang.png">
+  </a>
+</div>
+<main>
+  <div class="article-title">
+    
+  
+  <h1 class="title">
+    Seesion和Cookie的区别
+  </h1>
+  
+
+
+    <ul class="article-info">
+      <li>
+        发布
+        <time datetime="2019-11-26T09:41:43.000Z" itemprop="datePublished">2019-11-26</time>
+      </li>
+      <li>
+        
+    更新 <time datetime="2019-11-26T12:03:27.292Z" itemprop="dateUpdated">2019-11-26</time>
+
+      </li>
+      <li id="busuanzi_container_page_pv">
+        阅读 <span id="busuanzi_value_page_pv"></span>
+      </li>
+    </ul>
+  </div>
+  <div class="container">
+    <div class="article">
+      <div class="content">
+        
+        <h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ul>
+<li><p>Session 是存储在服务端，Cookie是存储在浏览器中。使用中存在Session和Cookie函数，可以直接使用</p>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3></li>
+<li><p>Cookie的诞生是为了能让无状态的HTTP报文带上一些特殊的数据，让服务端能够辨识请求的身份。简单点说，是浏览器上的一个key-value存储对象，可通过浏览器开发者工具(F12)看到Cookie的内容</p>
+<img src="/blog/2019/11/26/Seesion和Cookie的区别/01.png">
+</li>
+<li><p>写入数据方式<br>Cookie写入数据的方式是通过HTTP返回报文Header部分Set-Cookie字段来设置，一个带有写Cookie指令的HTTP返回的报文如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Set-Cookie: SESSIONID=e13179a6-2378-11e9-ac30-fa163eeeaea1; Path=/</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">Date: Tue, 29 Jan 2019 07:12:09 GMT</span><br><span class="line">Server: localhost</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>上述报文Set-Cookie指示浏览器设置 key 为 SEESSIONID，value 为SESSIONID=e13179a6-2378-11e9-ac30-fa163eeeaea1的 Cookie</p>
+<ul>
+<li><p>获取数据方式</p>
+<p>浏览器在发送请求的时候会检查当前域已经设置的Cookie，在HTTP请求报文 Header 部分的Cookie 字段里面带上 Cookie的信息。下面为一段HTTP报文：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">GET http://10.0.1.24:23333/ HTTP/1.1</span><br><span class="line">Host: 10.0.1.24:23333</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Pragma: no-cache</span><br><span class="line">Cache-Control: no-cache</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.9,en;q=0.8</span><br><span class="line">Cookie: SESSIONID=e13179a6-2378-11e9-ac30-fa163eeeaea1</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>从最后的Cookie 字段看到，浏览器请求时带上了 key为SESSIONID，value为e13179a6-2378-11e9-ac30-fa163eeeaea1的数据，后端直接解析HTTP报文就能获取Cookie的内容</p>
+<h3 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h3><ul>
+<li><p>Session 在代码里面指记录客户端状态的一个存储对象，是同一个客户端请求共享的数组。这个存储对象可以是文件、缓存系统、数据库。</p>
+<p>现在假设使用redis来实现Session功能，那么就要求浏览器每次请求都要带一个相同的字符串作为身份信息，对应redis的key ，redis value则为Session数组序列化的内容。</p>
+<p>浏览器中Session和Cookie的关系，通过Cookie传递这个身份信息，简单流程如下：</p>
+<ol>
+<li><p>客户端请求</p>
+</li>
+<li><p>服务端检测Header，发现没有Cookie，于是生成一个UUID</p>
+</li>
+<li><p>服务端处理数据，把部分数据（登录信息）存储到redis里面，UUID为key，用户id为value</p>
+</li>
+<li><p>返回报文中，增加Set-Cookie字段，内容带上UUID</p>
+</li>
+<li><p>浏览器收到报文，把UUID写进浏览器存储里面</p>
+</li>
+<li><p>浏览器再次请求，带上当前的域的Cookie，就是这个UUID</p>
+</li>
+<li><p>服务端通过Cookie字段获取到该UUID，去redis里面获取用户的信息</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="问题：若禁止Cookie-是否可以获取-Session"><a href="#问题：若禁止Cookie-是否可以获取-Session" class="headerlink" title="问题：若禁止Cookie 是否可以获取 Session"></a>问题：若禁止Cookie 是否可以获取 Session</h3><p>从上面可以知道，SESSIONID是通过Cookie来传递，若禁止Cookie禁止了，还能获取SESSIONID吗？答案是可以的。既然Cookie禁止了，我们可以用参数的方法传递SESSIONID，后端返回的时候，增加一个返回参数，叫SESSIONID，然后前端存储到localstorage里面。前端请求的时候，去localstorage获取SESSIONID，在请求参数里增加一个参数，后端Session处理，先尝试从Cookie中获取SESSIONID，若获取不到，再尝试从请求参数中获取SESSIONID。这样，就算禁止Cookie也是能获取Session的。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Session和Cookie 区别：</p>
+<ul>
+<li><p>Cookie 是浏览器端的存储对象，有容量限制，通过HTTP报文与后端交互</p>
+</li>
+<li><p>Session 是服务端的存储对象，实现的方式有文件系统，缓存系统、数据库</p>
+</li>
+</ul>
+<p>Session和Cookie 联系：</p>
+<ul>
+<li><p>Session和Cookie是为了实现HTTP请求带上客户端状态的方法</p>
+</li>
+<li><p>Session 大多数情况下都是依赖Cookie来传递 Seesion Id</p>
+</li>
+</ul>
+<h3 id="手动实现Session-python"><a href="#手动实现Session-python" class="headerlink" title="手动实现Session (python)"></a>手动实现Session (python)</h3><ul>
+<li>转载自：微信公众号(Java技术人)</li>
+</ul>
+
+      </div>
+        <div class="support-author">
+          <p>感谢您的阅读。 🙏
+          <a href="/blog/2019/10/19/copyright-reprinted/" target="_blank">关于转载请看这里</a>
+            <!--<a class="btn-pay"  href="#pay-modal">¥ 打赏支持</a>-->
+          </p>
+        </div>
+        <!--
+            <div class="like ">
+              <div class="like-button">
+                <a id="like-note" href="">
+                  <i class="icon-heart"></i>喜欢
+                </a>
+              </div>
+              <span id="likes-count">256</span>
+            </div>
+        -->
+
+        <!--<div class="otherLink">-->
+          <!--<div class="previous">-->
+          <!--</div>-->
+          <!--<div class="next">-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--<div class="comments" id="comments">-->
+          <!--
+-->
+        <!--</div>-->
+      <!--https://github.com/luuman/hexo-theme-spfk/blob/master/layout/_partial/post/nav.ejs-->
+      
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2019/11/26/进程与线程的理解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">进程与线程的理解</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+      </div>
+      <!--<div class="post-nav">-->
+          <!--<div class="post-nav-next post-nav-item">-->
+              <!--<a href="" rel="next" title="将Hexo博客主题更换为NexT主题">-->
+                <!--<i class="fa fa-chevron-left"></i>-->
+                 <!--将Hexo博客主题更换为NexT主题-->
+              <!--</a>-->
+          <!--</div>-->
+          <!--<span class="post-nav-divider"></span>-->
+          <!--<div class="post-nav-prev post-nav-item">-->
+              <!--<a href="" rel="prev" title="在这里">-->
+                <!--在这里 <i class="fa fa-chevron-right"></i>-->
+              <!--</a>-->
+          <!--</div>-->
+        <!--</div>-->
+    </div>
+   
+</main>
+<div class="footer">
+  <div class="info">
+    <!--<p>-->
+    <!--<a href="https://hexo.io"> Hexo </a> 强力驱动 |-->
+      <!--<a href="https://github.com/Youthink/hexo-themes-yearn"> Yearn </a>-->
+      <!--主题-->
+    <!--</p>-->
+    <p>&copy;2019-2020 90后小子的博客</p>
+  </div>
+</div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<script>//console
+  var consoleConfig = '\n欢迎访问(づ｡◕‿‿◕｡)づ！\n,\n小白一个，欢迎学习交流~~~ 🎉🎉🎉 \n'.split(',');
+  var canConsole = true;
+  var consoleInfo = (function(consoleConfig) {
+  if (!canConsole || !consoleConfig || consoleConfig.length < 1) {
+    return;
+  }
+  var consoleColor = '#6190e8';
+  var _console;
+  var backgroundTextStyle = 'padding: 1px 5px;color: #fff;background: ' + consoleColor + ';'
+  var textStyle = 'color: ' + consoleColor + ';';
+
+  consoleConfig.map(o => {
+    var num = (o.match(/%c/g) || []).length;
+    if(/^http(s)?:\/\//.test(o)) {
+      console.log('%c     ', 'background: url(' + o + ') no-repeat left center;font-size: 180px;');
+      return;
+    }
+    if (num > 0) {
+      var logArguments = [];
+      for (var i = 0; i < num; i++) {
+        if (i % 2 === 0) {
+          logArguments.push(backgroundTextStyle);
+        } else {
+          logArguments.push(textStyle);
+        }
+      }
+      (_console = console).log.apply(_console, ['%c' + o, textStyle].concat(logArguments));
+      return;
+    }
+    console.log('%c' + o, textStyle);
+  });
+}(consoleConfig));</script><script type="text/javascript" src="/blog/./js/main.js"></script>
+
+  <script type="text/javascript" color="0,0,255" opacity="0.7" zindex="-2" count="10" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  <script src="//at.alicdn.com/t/font_159214_mvtxvg9me9.js"></script>
+</body>
+</html>
